@@ -1,1 +1,9 @@
-<p>home-page works!</p>
+<div class="container">
+    <div class="row justify-content-around">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products" [routerLink] = "['/products', lot.slug]">
+            <img [src]="lot.img" [alt]="lot.name" class="w-100">
+            <h3>{{ lot.name }}</h3>
+            <p>{{ lot.price }}₴</p>
+        </div>
+    </div>
+</div>

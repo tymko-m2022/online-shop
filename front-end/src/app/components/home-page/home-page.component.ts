@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LotService } from 'src/app/services/lot.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HomePageComponent {
 
+  constructor(private lotService: LotService) {}
+
+  products = this.lotService.products;
 }

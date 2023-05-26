@@ -2,16 +2,26 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { LotComponent } from './components/lot/lot.component';
+import { ShoppingComponent } from './components/shopping/shopping.component';
+import { AdminComponent } from './admin/admin.component';
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', component: LayoutComponent, children:
     [
       {path: '', component: HomePageComponent},
-      {path: 'about', component: NavbarComponent}
+      {path: 'products/:slug', component: LotComponent},
+      {path: 'cart', component: ShoppingComponent}
     ] 
   },
+  {path: '', component: AdminComponent, children: 
+    [
+      {path: 'admin', component: DashboardComponent}
+    ]
+  }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

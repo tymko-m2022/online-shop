@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {Routes, RouterModule} from '@angular/router';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,18 +9,12 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { FormsModule } from '@angular/forms';
-import { MainComponent } from './main/main.component';
-import { LotComponent } from './lot/lot.component';
-import { ShoppingComponent } from './shopping/shopping.component';
+import { LotComponent } from './components/lot/lot.component';
+import { ShoppingComponent } from './components/shopping/shopping.component';
 import { AdminComponent } from './admin/admin.component';
-
-const appRoutes: Routes =[
-  { path: '', component: MainComponent},
-  { path: 'lot', component: LotComponent},
-  { path: 'shop', component: ShoppingComponent},
-  { path: 'admin', component: AdminComponent},
-  { path: '**', component: MainComponent }
-];
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
+import { NavbarAdminComponent } from './admin/components/shared/navbar/navbar.component';
+import { FooterAdminComponent } from './admin/components/shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,17 +23,18 @@ const appRoutes: Routes =[
     NavbarComponent,
     FooterComponent,
     LayoutComponent,
-    MainComponent,
     LotComponent,
     ShoppingComponent,
-    AdminComponent
+    AdminComponent,
+    NavbarAdminComponent,
+    FooterAdminComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
