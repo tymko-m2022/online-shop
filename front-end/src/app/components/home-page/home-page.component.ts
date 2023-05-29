@@ -10,5 +10,5 @@ export class HomePageComponent {
 
   constructor(private lotService: LotService) {}
 
-  products = this.lotService.products;
+  products = this.lotService.products ? this.lotService.products : [];
 }

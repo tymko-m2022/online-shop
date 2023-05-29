@@ -1,1 +1,31 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="form-floating mb-3">
+        <input type="text" name="slug" [(ngModel)]="product.slug" class="form-control" id="floatingInput" placeholder="Type yout slug" (input) = "changeField($event)">
+        <label for="floatingInput">Slug</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" name="name" [(ngModel)]="product.name" class="form-control" id="floatingInput" placeholder="Type your name" (input) = "changeField($event)">
+        <label for="floatingInput">Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea class="form-control" name="desc" [(ngModel)]="product.desc" placeholder="Type your desc" id="floatingTextarea2" style="height: 100px" (input) = "changeField($event)"></textarea>
+        <label for="floatingTextarea2">Desc</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="price" [(ngModel)]="product.price" class="form-control" id="floatingInput" placeholder="Type your price" (input) = "changeField($event)">
+        <label for="floatingInput">Price</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" name="img" [(ngModel)]="product.img" class="form-control" id="floatingInput" placeholder="Type your src" (input) = "changeField($event)">
+        <label for="floatingInput">Img</label>
+    </div>
+    <button (click)="addLot()">Add lot</button>
+    <hr>
+    <div class="row justify-content-around">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products; let i = index" [routerLink] = "['/products', lot.slug]">
+            <img [src]="lot.img" [alt]="lot.name" class="w-100">
+            <h3>{{ lot.name }}</h3>
+            <button (click) = 'removeLot(i)'>Delete</button>
+        </div>
+    </div>
+</div>
