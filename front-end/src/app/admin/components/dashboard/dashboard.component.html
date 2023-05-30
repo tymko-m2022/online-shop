@@ -1,25 +1,30 @@
 <div class="container">
     <div class="form-floating mb-3">
-        <input type="text" name="slug" [(ngModel)]="product.slug" class="form-control" id="floatingInput" placeholder="Type yout slug" (input) = "changeField($event)">
+        <input type="text" name="slug" [class.valid]="validSlug" [class.notValid]="!validWarnSlug" [(ngModel)]="product.slug" class="form-control" id="floatingInput" placeholder="Type yout slug" (input) = "changeField($event)">
         <label for="floatingInput">Slug</label>
+        <span [class.d-none]="validWarnSlug">Тут можна вводити тільки букви та пробіли</span>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" name="name" [(ngModel)]="product.name" class="form-control" id="floatingInput" placeholder="Type your name" (input) = "changeField($event)">
+        <input type="text" name="name" [class.valid]="validName" [class.notValid]="!validWarnName" [(ngModel)]="product.name" class="form-control" id="floatingInput" placeholder="Type your name" (input) = "changeField($event)">
         <label for="floatingInput">Name</label>
+        <span [class.d-none]="validWarnName">Тут можна вводити тільки букви та пробіли</span>
     </div>
     <div class="form-floating mb-3">
-        <textarea class="form-control" name="desc" [(ngModel)]="product.desc" placeholder="Type your desc" id="floatingTextarea2" style="height: 100px" (input) = "changeField($event)"></textarea>
+        <textarea class="form-control" [class.valid]="validDesc" [class.notValid]="!validWarnDesc" name="desc" [(ngModel)]="product.desc" placeholder="Type your desc" id="floatingTextarea2" style="height: 100px" (input) = "changeField($event)"></textarea>
         <label for="floatingTextarea2">Desc</label>
+        <span [class.d-none]="validWarnDesc">Тут можна вводити тільки букви, цифри та пробіли</span>
     </div>
     <div class="form-floating mb-3">
-        <input type="number" name="price" [(ngModel)]="product.price" class="form-control" id="floatingInput" placeholder="Type your price" (input) = "changeField($event)">
+        <input type="number" [class.valid]="validPrice" [class.notValid]="!validWarnPrice" name="price" [(ngModel)]="product.price" class="form-control" id="floatingInput" placeholder="Type your price" min="0" (input) = "changeField($event)">
         <label for="floatingInput">Price</label>
+        <span [class.d-none]="validWarnPrice">Тут можна вводити тільки цифри більше нуля</span>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" name="img" [(ngModel)]="product.img" class="form-control" id="floatingInput" placeholder="Type your src" (input) = "changeField($event)">
+        <input type="text" name="img" [class.valid]="validImg" [class.notValid]="!validWarnImg" [(ngModel)]="product.img" class="form-control" id="floatingInput" placeholder="Type your src" (input) = "changeField($event)">
         <label for="floatingInput">Img</label>
+        <span [class.d-none]="validWarnImg">Нажаль картинку не було завантажено, перегляньте чи все вірно і спробуйте ще раз</span>
     </div>
-    <button (click)="addLot()">Add lot</button>
+    <button [class.hide] = "!hideBtn" (click)="addLot()">Add lot</button>
     <hr>
     <div class="row justify-content-around">
         <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products; let i = index" [routerLink] = "['/products', lot.slug]">

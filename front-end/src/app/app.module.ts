@@ -15,6 +15,7 @@ import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { NavbarAdminComponent } from './admin/components/shared/navbar/navbar.component';
 import { FooterAdminComponent } from './admin/components/shared/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FooterAdminComponent } from './admin/components/shared/footer/footer.co
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,3 +2,31 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+
+.hide{
+    opacity: .7;
+    pointer-events: none;
+}
+
+.form-control{
+    transition: all .3s ease-in-out;
+    &:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.notValid{
+    border: 2px solid red;
+    &:focus{
+        border: 2px solid red;
+    }
+}
+
+.valid{
+    border: 2px solid green;
+    &:focus{
+        border: 2px solid green;
+    }
+}
