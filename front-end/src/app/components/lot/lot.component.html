@@ -1,4 +1,16 @@
-<img [src]="lot.img" [alt]="lot.name">
-<h3>{{ lot.name }}</h3>
-<p>{{ lot.price }}₴</p>
-<p>{{lot.desc}}</p>
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-8 col-lg-7">
+            <img [src]="lot.img" [alt]="lot.name" class="w-100">
+        </div>
+        <div class="col-12 col-md-4 col-lg-5">             
+            <h1 class="mb-4">{{ lot.name }}</h1>
+            <h5 class="my-5 fs-3 text-danger">{{ lot.price }}₴</h5>
+            <p class="mb-4 fs-6">{{lot.desc}}</p>
+            <hr>
+            <button class="btn btn-danger" (click)="addToCart()">
+                Додати до кошику
+            </button>
+        </div>
+    </div>
+</div>

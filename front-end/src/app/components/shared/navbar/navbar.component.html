@@ -15,8 +15,9 @@
         </ul>
       </div>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <li class="nav-item position-relative">
           <a class="nav-link" routerLink="/cart"><i class="bi bi-cart"></i></a>
+          <span class="cart-count position-absolute top-0 end-0 bg-danger text-white rounded-circle d-flex justify-content-center align-items-center fw-bold" style="width: 16px; height: 16px; font-size: 12px;">{{cartCount}}</span>
         </li>
       </ul>
     </div>

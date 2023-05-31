@@ -16,6 +16,8 @@ import { DashboardComponent } from './admin/components/dashboard/dashboard.compo
 import { NavbarAdminComponent } from './admin/components/shared/navbar/navbar.component';
 import { FooterAdminComponent } from './admin/components/shared/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterPipe } from './components/home-page/filter.pipe';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminComponent,
     NavbarAdminComponent,
     FooterAdminComponent,
-    DashboardComponent
+    DashboardComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
