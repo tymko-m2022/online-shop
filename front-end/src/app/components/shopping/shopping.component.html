@@ -1,1 +1,15 @@
-<p>shopping works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-7 col-lg-8">
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3" *ngFor="let cartItem of cartItems">
+                    <app-cart-item [cartItem] = "cartItem"></app-cart-item>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-5 col-lg-4">
+            <h2>Сума замовлення: {{totalPrice}}₴</h2>
+            <button class="btn btn-success w-100" (click)="placeOrder()">Оформити замовлення</button>
+        </div>
+    </div>
+</div>

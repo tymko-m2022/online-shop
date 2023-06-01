@@ -17,6 +17,7 @@ import { NavbarAdminComponent } from './admin/components/shared/navbar/navbar.co
 import { FooterAdminComponent } from './admin/components/shared/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterPipe } from './components/home-page/filter.pipe';
+import { CartItemComponent } from './components/shopping/cart-item/cart-item.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FilterPipe } from './components/home-page/filter.pipe';
     NavbarAdminComponent,
     FooterAdminComponent,
     DashboardComponent,
-    FilterPipe
+    FilterPipe,
+    CartItemComponent
   ],
   imports: [
     BrowserModule,

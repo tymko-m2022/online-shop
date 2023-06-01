@@ -1,0 +1,9 @@
+<div class="cart-item">
+    <div class="cart-item-details">
+      <img [src]="cartItem.img" [alt]="cartItem.name" class="cart-item-image w-100">
+      <h3>{{ cartItem.name }}</h3>
+      <p>Quantity: <span (click)="minusQuantity()">-</span> {{ cartItem.quantity }} <span (click)="plusQuantity()">+</span></p>
+      <p>Price: {{price}}₴</p>
+    </div>
+    <button class="btn btn-danger" (click)="removeFromCart()">Remove</button>
+  </div>
