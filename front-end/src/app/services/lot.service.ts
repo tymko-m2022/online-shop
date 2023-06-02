@@ -18,6 +18,7 @@ export class LotService {
 
   constructor() { 
     this.products = this.dataLot;
+    this.comments = this.dataComments;
   }
 
   set dataLot(item: Lot[]){
