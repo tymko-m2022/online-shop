@@ -2,7 +2,7 @@
     <div class="form-floating mb-3">
         <input type="text" name="slug" [class.valid]="validSlug" [class.notValid]="!validWarnSlug" [(ngModel)]="product.slug" class="form-control" id="floatingInput" placeholder="Type yout slug" (input) = "changeField($event)">
         <label for="floatingInput">Slug</label>
-        <span [class.d-none]="validWarnSlug">Тут можна вводити тільки букви та пробіли</span>
+        <span [class.d-none]="validWarnSlug">Дане значення вже введено або не правильно відформатовано(якщо у вас два слова, то використовуйте для з'єднання -)</span>
     </div>
     <div class="form-floating mb-3">
         <input type="text" name="name" [class.valid]="validName" [class.notValid]="!validWarnName" [(ngModel)]="product.name" class="form-control" id="floatingInput" placeholder="Type your name" (input) = "changeField($event)">

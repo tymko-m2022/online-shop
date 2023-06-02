@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { LotService, Lot } from 'src/app/services/lot.service';
+import { LotService } from 'src/app/services/lot.service';
 import { HttpClient } from '@angular/common/http';
+import { DEFAULT_LOT, Lot } from 'src/app/models/lot.model';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  products: Lot[]
+  products: Lot[];
 
   product: Lot;
 
@@ -26,7 +28,7 @@ export class DashboardComponent {
   validWarnImg: boolean = true;
 
   constructor(private lotService: LotService, private http: HttpClient){
-    this.product = new Lot();
+    this.product = new DEFAULT_LOT();
     this.products = this.lotService.products ? this.lotService.returnLots() : [];
   }
 
@@ -36,7 +38,7 @@ export class DashboardComponent {
     const name = target.name;
     switch (name) {
       case "slug":
-        this.validSlug = this.checkName(value);
+        this.validSlug = this.checkSlug(value);
         this.validWarnSlug = this.validSlug ? true : false;
         break;
       case "name":
@@ -59,10 +61,27 @@ export class DashboardComponent {
     this.hideBtn = this.validSlug && this.validName && this.validPrice && this.validDesc && this.validImg;
   }
 
+  checkSlug(value: string): boolean {
+    if (!value) {
+      return false;
+    }
+  
+    const existingProduct = this.products.find(product => product.slug === value);
+    if (!existingProduct) {
+      const strRegExp: string = `[\\p{L}\\d\\-]{${value.length}}`;
+      const regexp = new RegExp(strRegExp, "u");
+      if (regexp.test(value)) {
+        return true;
+      }
+    }
+  
+    return false;
+  }
+
   checkName(value: string): boolean{
     if (!value) {
       return false;
-    };
+    }
     const strRegExp: string = `[\\p{L}\\s\`]{${value.length}}`;
     const regexp = new RegExp(strRegExp,"u");
     if (regexp.test(value)) {
@@ -76,14 +95,14 @@ export class DashboardComponent {
   checkPrice(value: number): boolean{
     if (!value || value < 0) {
       return false;
-    };
+    }
     return true;
   }
 
   checkDesc(value: string): boolean{
     if (!value) {
       return false;
-    };
+    }
     const strRegExp: string = `[\\p{L}\\s\\d]{${value.length}}`;
     const regexp = new RegExp(strRegExp,"u");
     if (regexp.test(value)) {
@@ -116,7 +135,7 @@ export class DashboardComponent {
 
   addLot(){
       this.lotService.addLots(this.product);
-      this.product = new Lot();
+      this.product = new DEFAULT_LOT();
       // shitty код треба придумати щось круче
       this.validSlug = false;
       this.validName = false;

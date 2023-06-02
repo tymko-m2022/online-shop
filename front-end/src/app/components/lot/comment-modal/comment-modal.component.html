@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title">Додати коментар</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <textarea class="form-control" [(ngModel)]="newComment" rows="4"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="saveComment()">Зберегти</button>
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Скасувати</button>
+</div>

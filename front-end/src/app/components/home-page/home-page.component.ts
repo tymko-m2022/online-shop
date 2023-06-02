@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LotService, Lot } from 'src/app/services/lot.service';
+import { LotService } from 'src/app/services/lot.service';
 import { FilterPipe } from './filter.pipe';
 
 @Component({

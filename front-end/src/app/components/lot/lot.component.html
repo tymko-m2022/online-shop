@@ -12,5 +12,14 @@
                 Додати до кошику
             </button>
         </div>
+        <div class="col-12 col-md-10 col-xl-9 my-5">
+            <div class="d-flex justify-content-between">
+                <h4>Відгуки</h4>
+                <button class="btn btn-outline-info" (click)="openCommentModal()">
+                    Додати коментар
+                </button>
+            </div>
+            <app-comment-list [comments] = "comments" />
+        </div>
     </div>
 </div>

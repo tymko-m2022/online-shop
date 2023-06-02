@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { LotService } from 'src/app/services/lot.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommentModalComponent } from './comment-modal/comment-modal.component';
+
 
 @Component({
   selector: 'app-lot',
@@ -10,21 +13,46 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class LotComponent implements OnInit {
   lot: any;
+  comments: string[] = [];
+  newComment: string = "";
 
   constructor(
     private route: ActivatedRoute, 
     private lotService: LotService,
-    private cartService: CartService
+    private cartService: CartService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const lotSlug = params['slug'];
       this.lot = this.lotService.products.find(l => l.slug === lotSlug);
+      setTimeout(() => {
+        this.comments = this.lotService.getCommentsBySlug(lotSlug);
+      });
     });
   }
 
   addToCart() {
     this.cartService.addToCart(this.lot);
+  }
+
+  addComment() {
+    if (this.newComment.trim() !== '') {
+      this.lotService.addComment(this.lot.slug, this.newComment);
+      this.comments = this.lotService.getCommentsBySlug(this.lot.slug);
+      this.newComment = '';
+    }
+  }
+
+  openCommentModal() {
+    const myModal = this.modalService.open(CommentModalComponent);
+    myModal.componentInstance.lotSlug = this.lot.slug;
+    myModal.result.then((newComment: string) => {
+      if (newComment.trim() !== '') {
+        this.lotService.addComment(this.lot.slug, newComment);
+        this.comments = this.lotService.getCommentsBySlug(this.lot.slug);
+      }
+    }).catch(() => {});
   }
 }

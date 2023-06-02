@@ -18,6 +18,8 @@ import { FooterAdminComponent } from './admin/components/shared/footer/footer.co
 import { HttpClientModule } from '@angular/common/http';
 import { FilterPipe } from './components/home-page/filter.pipe';
 import { CartItemComponent } from './components/shopping/cart-item/cart-item.component';
+import { CommentListComponent } from './components/lot/comment-list/comment-list.component';
+import { CommentModalComponent } from './components/lot/comment-modal/comment-modal.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { CartItemComponent } from './components/shopping/cart-item/cart-item.com
     FooterAdminComponent,
     DashboardComponent,
     FilterPipe,
-    CartItemComponent
+    CartItemComponent,
+    CommentListComponent,
+    CommentModalComponent
   ],
   imports: [
     BrowserModule,
