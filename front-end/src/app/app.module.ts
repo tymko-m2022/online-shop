@@ -20,6 +20,7 @@ import { FilterPipe } from './components/home-page/filter.pipe';
 import { CartItemComponent } from './components/shopping/cart-item/cart-item.component';
 import { CommentListComponent } from './components/lot/comment-list/comment-list.component';
 import { CommentModalComponent } from './components/lot/comment-modal/comment-modal.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CommentModalComponent } from './components/lot/comment-modal/comment-mo
     FilterPipe,
     CartItemComponent,
     CommentListComponent,
-    CommentModalComponent
+    CommentModalComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -37,20 +37,22 @@ export class LotComponent implements OnInit {
     this.cartService.addToCart(this.lot);
   }
 
-  addComment() {
-    if (this.newComment.trim() !== '') {
-      this.lotService.addComment(this.lot.slug, this.newComment);
-      this.comments = this.lotService.getCommentsBySlug(this.lot.slug);
-      this.newComment = '';
-    }
-  }
-
   openCommentModal() {
     const myModal = this.modalService.open(CommentModalComponent);
     myModal.componentInstance.lotSlug = this.lot.slug;
     myModal.result.then((newComment: string) => {
       if (newComment.trim() !== '') {
-        this.lotService.addComment(this.lot.slug, newComment);
+        let comment = newComment;
+        const warningWords = ['кокос', 'банан', 'плохой'];
+        warningWords.forEach(word => {
+          const regex = new RegExp(word, 'gi');
+          comment = comment.replace(regex, '*'.repeat(word.length));
+        })
+
+        const regex = new RegExp(/@/gi);
+        comment = comment.replace(regex, '*');
+
+        this.lotService.addComment(this.lot.slug, comment);
         this.comments = this.lotService.getCommentsBySlug(this.lot.slug);
       }
     }).catch(() => {});
