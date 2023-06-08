@@ -1,18 +1,29 @@
-<div class="container">
-    <div class="row justify-content-around">
-        <div class="col-8">
-            <h1>Природний майданчик</h1>
-        </div>
-        <div class="col-4">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingFilter" [(ngModel)]="filterText" placeholder="Введіть текст для фільтрації">
-                <label for="floatingFilter">Введіть текст для фільтрації</label>
+<section class="layout">
+    <div class="container">
+        <div class="row mb-4 align-items-center justify-content-around">
+            <div class="col-8">
+                <h1 class="layout-title">Природний майданчик</h1>
+                <small class="layout-info">Всього: {{products.length}}</small>
+            </div>
+            <div class="col-4">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingFilter" [(ngModel)]="filterText" placeholder="Введіть текст для фільтрації">
+                    <label for="floatingFilter">Введіть текст для фільтрації</label>
+                </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products | filter: filterText" [routerLink] = "['/products', lot.slug]">
-            <img [src]="lot.img" [alt]="lot.name" class="w-100">
-            <h3>{{ lot.name }}</h3>
-            <p>{{ lot.price }}₴</p>
+        <div class="row row-40 justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products | filter: filterText" [routerLink] = "['/products', lot.slug]">
+                <div class="lotCard">
+                    <div class="lotCard-img">
+                        <img [src]="lot.img" [alt]="lot.name" class="w-100">
+                    </div>
+                    <div class="lotCard-info d-flex flex-column align-items-center justify-content-center">
+                        <h3 class="lotCard-title">{{ lot.name }}</h3>
+                        <p class="lotCard-price">{{ lot.price }}₴</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>

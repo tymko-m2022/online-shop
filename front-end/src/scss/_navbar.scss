@@ -1,0 +1,29 @@
+.logo{
+    height: 35px;
+    object-fit: contain;
+}
+
+.navbar{
+    height: 80px;
+    background-color: white;
+}
+
+.nav{
+    &-link{
+    color: $primaryColor;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+&-link:hover{
+    color: $secondaryColor;
+}
+}
+
+.bi-cart{
+    color: $secondaryColor;
+}
+
+.bi-cart:hover{
+    color: $cartColor;
+}

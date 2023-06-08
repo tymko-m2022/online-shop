@@ -2,11 +2,18 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './scss/params';
+@import './scss/navbar';
+@import './scss/card';
+@import './scss/layout';
+
 
 html{
-    font-family: 'Josefin Sans', sans-serif;
     font-size: 16px;
+}
+
+body{
+    font-family: $font;
 }
 
 
@@ -35,4 +42,8 @@ html{
     &:focus{
         border: 2px solid green;
     }
+}
+
+.row-40{
+    row-gap: 40px;
 }
