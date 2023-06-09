@@ -1,25 +1,43 @@
-<div class="container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-12 col-md-8 col-lg-7">
-            <img [src]="lot.img" [alt]="lot.name" class="w-100">
-        </div>
-        <div class="col-12 col-md-4 col-lg-5">             
-            <h1 class="mb-4">{{ lot.name }}</h1>
-            <h5 class="my-5 fs-3 text-danger">{{ lot.price }}₴</h5>
-            <p class="mb-4 fs-6">{{lot.desc}}</p>
-            <hr>
-            <button class="btn btn-danger" (click)="addToCart()">
-                Додати до кошику
-            </button>
-        </div>
-        <div class="col-12 col-md-10 col-xl-9 my-5">
-            <div class="d-flex justify-content-between">
-                <h4>Відгуки</h4>
-                <button class="btn btn-outline-info" (click)="openCommentModal()">
-                    Додати коментар
-                </button>
+
+
+<section class="layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-10">
+                <div class="lotDetail">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-12 col-md-5 col-lg-6">
+                            <div class="lotDetail-imgBlock">
+                                <img [src]="lot.img" [alt]="lot.name" class="lotDetail-img">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-7 col-lg-6">             
+                            <h1 class="mb-3 lotDetail-title">{{ lot.name }}</h1>
+                            <h5 class="mb-4 lotDetail-price">{{ lot.price }}₴</h5>
+                            <p class="mb-3 layout-info">{{lot.desc}}</p>
+                            <hr>
+                            <button class="btn btn-danger" (click)="addToCart()">
+                                Додати до кошику
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <app-comment-list [comments] = "comments" />
         </div>
     </div>
-</div>
+</section>
+<section class="layout layout--bg">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-10 col-xl-9 my-5">
+                <div class="d-flex justify-content-between">
+                    <h4>Відгуки</h4>
+                    <button class="btn btn-outline-info" (click)="openCommentModal()">
+                        Додати коментар
+                    </button>
+                </div>
+                <app-comment-list [comments] = "comments" />
+            </div>
+        </div>
+    </div>
+</section>

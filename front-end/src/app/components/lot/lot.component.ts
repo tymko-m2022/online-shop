@@ -9,7 +9,7 @@ import { CommentModalComponent } from './comment-modal/comment-modal.component';
 @Component({
   selector: 'app-lot',
   templateUrl: './lot.component.html',
-  styleUrls: ['./lot.component.css']
+  styleUrls: ['./lot.component.scss']
 })
 export class LotComponent implements OnInit {
   lot: any;

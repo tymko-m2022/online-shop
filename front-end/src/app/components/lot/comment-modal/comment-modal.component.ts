@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-comment-modal',
   templateUrl: './comment-modal.component.html',
-  styleUrls: ['./comment-modal.component.css']
+  styleUrls: ['./comment-modal.component.scss']
 })
 export class CommentModalComponent {
   @Input() lotSlug: string = '';

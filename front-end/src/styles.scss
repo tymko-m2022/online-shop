@@ -6,6 +6,8 @@
 @import './scss/navbar';
 @import './scss/card';
 @import './scss/layout';
+@import './scss/footer';
+@import './scss/lot';
 
 
 html{
@@ -16,6 +18,10 @@ body{
     font-family: $font;
 }
 
+h1,h2,h3,h4,h5,h6,p,ul,ol{
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 .hide{
     opacity: .7;
@@ -47,3 +53,35 @@ body{
 .row-40{
     row-gap: 40px;
 }
+
+.form{
+    position: relative;
+    
+    .searchIcon{
+        height: 40px;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $secondaryColor;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+    }
+
+    &-control{
+        padding-right: 60px;
+        padding-left: 10px;
+        border-radius: 0px;
+        height: 40px;
+        border: 2px solid $textColor;
+        transition: all .5s ease-in-out;
+        &:focus{
+            outline: none;
+            box-shadow: none;
+            border-color: $secondaryColor;
+        }
+    }
+}
+
