@@ -69,5 +69,11 @@
         box-shadow: 0px 0px 10px 5px $bgShadeDark;
         color: $secondaryColor;
         font-size: 14px;
+        transition: all .5s ease-in-out;
+
+        &:hover{
+            color: $cartColor;
+            box-shadow: 0px 0px 10px 5px $secondaryColor;
+        }
     }
 }

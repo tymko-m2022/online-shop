@@ -56,12 +56,4 @@
         object-fit: contain;
         object-position: center;
     }
-
-    .btn-danger{
-        width: 100%;
-        background: $secondaryColor;
-        &:hover{
-            background: $cartColor;
-        }
-    }
 }

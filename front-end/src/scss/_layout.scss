@@ -13,6 +13,18 @@
         color: $cardNameColor;
         margin-top: 0;
         margin-bottom: 0;
+
+        &--lg{
+            font-size: 32px;
+            line-height: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid $bgShadeDark;
+            @media screen and (min-width: 992px){
+                font-size: 36px;
+                line-height: 36px;
+            }
+
+        }
     }
 
     &-info{

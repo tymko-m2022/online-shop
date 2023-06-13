@@ -1,0 +1,22 @@
+.btn{
+    &-pinok{
+        padding: 11px 30px 9px;
+        transition: all .5s ease-in-out;
+        background: $secondaryColor;
+        color: white;
+        border-radius: 3px;
+        font-size: 16px;
+        &:hover{
+            background-color: $cartColor;
+            color: white;
+        }
+
+        &--green{
+            background: $colorSuccess; 
+            &:hover{
+                background-color: $colorSuccessDark;
+                color: white;
+            }
+        }
+    }
+}
