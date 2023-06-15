@@ -18,5 +18,17 @@
                 color: white;
             }
         }
+
+        &--outline{
+            padding: 8px 30px 7px;
+            background: transparent;
+            border: 1px solid $secondaryColor;
+            color: $secondaryColor;
+
+            &:hover{
+                color: #fff;
+                border: 1px solid $cartColor;
+            }
+        }
     }
 }

@@ -1,8 +1,9 @@
+<span id="#top"></span>
 <section class="layout">
     <div class="container">
         <div class="row mb-4 align-items-center justify-content-around">
             <div class="col-8">
-                <h1 class="layout-title mb-1">Природний майданчик</h1>
+                <h1 class="layout-title mb-1">Природний майданчик/Скарбниця дерев </h1>
                 <small class="layout-info" *ngIf="(products | filter: filterText).length > 0; else noProducts">Всього: {{(products | filter: filterText).length}}
                     {{(products | filter: filterText).length === 1 ? 'товар' :
                     ((products | filter: filterText).length >= 2 && (products | filter: filterText).length <= 4) ? 'товари' :

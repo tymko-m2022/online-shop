@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class ShoppingComponent implements OnDestroy {
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
+  hasItems: boolean = false;
   private cartItemsSubscription: Subscription;
 
   constructor(private cartService: CartService){
@@ -23,6 +24,11 @@ export class ShoppingComponent implements OnDestroy {
   ngOnInit() {
     this.cartItems = this.cartService.returnLot();
     this.calculateTotalPrice();
+    this.checkCartItems();
+  }
+
+  checkCartItems(): void{
+    this.hasItems = this.cartItems.length > 0;
   }
 
   calculateTotalPrice() {
@@ -34,7 +40,8 @@ export class ShoppingComponent implements OnDestroy {
   placeOrder(){
     this.cartService.clearCart();
     this.cartItems = this.cartService.returnLot();
-    this.calculateTotalPrice()
+    this.calculateTotalPrice();
+    this.checkCartItems();
   }
 
   ngOnDestroy() {

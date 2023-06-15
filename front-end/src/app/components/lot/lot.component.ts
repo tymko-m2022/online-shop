@@ -38,7 +38,7 @@ export class LotComponent implements OnInit {
   }
 
   openCommentModal() {
-    const myModal = this.modalService.open(CommentModalComponent);
+    const myModal = this.modalService.open(CommentModalComponent, { centered: true, modalDialogClass: 'my-modal', backdropClass: 'light-pink-backdrop' });
     myModal.componentInstance.lotSlug = this.lot.slug;
     myModal.result.then((newComment: string) => {
       if (newComment.trim() !== '') {

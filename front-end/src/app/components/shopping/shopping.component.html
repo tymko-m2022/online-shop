@@ -1,7 +1,14 @@
 <section class="layout">
     <div class="container">
         <h1 class="layout-title layout-title--lg mb-5">Кошик</h1>
-        <div class="row">
+        <div *ngIf="!hasItems" class="row justify-content-center w-100">
+            <div class="col-10 col-sm-9 col-md-8 col-lg-7 col-xl-6 text-center">
+                <img src="/assets/empty-cart.webp" alt="Empty Cart" class="w-100">
+                <h2 class="mt-2 mb-3 text-center">Наразі товарів в кошику немає</h2>
+                <a class="btn btn-pinok" routerLink="/">Повернутись до каталогу товарів</a>
+            </div>
+        </div>
+        <div *ngIf="hasItems" class="row">
             <div class="col-12 col-md-7 col-lg-8">
                 <div class="row">
                     <div class="col-lg-6 col-xl-5 d-none d-lg-block">
@@ -17,7 +24,7 @@
                         <h2 class="cart-title text-center">Загалом</h2>
                     </div>
                     <div class="col-6 col-sm-12" *ngFor="let cartItem of cartItems">
-                        <app-cart-item [cartItem] = "cartItem"></app-cart-item>
+                        <app-cart-item [cartItem] = "cartItem" (updateCheck)="checkCartItems()"></app-cart-item>
                     </div>
                 </div>
             </div>

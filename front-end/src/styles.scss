@@ -52,8 +52,14 @@ h1,h2,h3,h4,h5,h6,p,ul,ol{
     }
 }
 
-.row-40{
-    row-gap: 40px;
+.row{
+    &-30{
+        row-gap: 30px;
+    }
+
+    &-40{
+        row-gap: 40px;
+    }
 }
 
 .form{
@@ -87,3 +93,45 @@ h1,h2,h3,h4,h5,h6,p,ul,ol{
     }
 }
 
+.modal{
+    &-content{
+        position: relative;
+        padding: 15px;
+        border-radius: 0px;
+        border: none;
+        background-color: rgba(#fff, .4);
+        backdrop-filter: blur(15px);
+
+        .form-control{
+            background-color: transparent;
+            border: 1px solid $primaryColor;
+        }
+
+        .close{
+            font-size: 32px;
+            color: $primaryColor;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+
+            &:hover{
+                color: $secondaryColor;
+            }
+        }
+    }
+
+    &-title{
+        text-align: center;
+        color: $primaryColor;
+        padding: 0px 20px;
+        width: 100%;
+    }
+
+    &-header, &-footer{
+        border: none;
+    }
+}
+
+.light-pink-backdrop{
+    background-color: rgba($secondaryColor, .5);
+}
