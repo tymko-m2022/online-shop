@@ -42,6 +42,7 @@
         }
 
         &-count{
+            user-select: none;
             background: $bgShadeLight;
             width: 60px;
             height: 20px;
@@ -50,6 +51,8 @@
             align-items: center;
 
             &-btn{
+                padding: 0;
+                border: none;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -61,9 +64,20 @@
                 cursor: pointer;
                 transition: all .5s ease-in-out;
 
+                &:focus{
+                    outline: none;
+                    border: none;
+                    box-shadow: none;
+                }
+
                 &:hover{
                     background-color: $subTextColor;
                     color: $bgShadeDark;
+                }
+
+                &[disabled]{
+                    opacity: .4;
+                    pointer-events: none;
                 }
             }
         }

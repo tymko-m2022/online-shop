@@ -73,8 +73,6 @@ export class CartService {
       this.cartCountSubject.next(this.calculateTotalQuantity());
       this.dataCart = this.cartItems;
       this.cartItemsUpdated.next();
-    } else{
-      alert("Кількість не може бути менше 1")
     }
   }
 

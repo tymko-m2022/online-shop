@@ -10,7 +10,13 @@
 @import './scss/lot';
 @import './scss/cart-item';
 @import './scss/btn';
+@import './scss/dashboard';
 
+*{
+    &::selection {
+        background: rgba($secondaryColor, .35);
+    }
+}
 
 html{
     font-size: 16px;

@@ -12,9 +12,7 @@ export class CartItemComponent implements OnChanges{
   @Output() updateCheck: EventEmitter<void> = new EventEmitter<void>();
   price: number = 0;
 
-  constructor(private cartService: CartService){
-     
-  }
+  constructor(private cartService: CartService){ }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['cartItem'] && changes['cartItem'].currentValue){
