@@ -3,12 +3,12 @@ import { LotService } from 'src/app/services/lot.service';
 import { HttpClient } from '@angular/common/http';
 import { DEFAULT_LOT, Lot } from 'src/app/models/lot.model';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent {
   products: Lot[];
 

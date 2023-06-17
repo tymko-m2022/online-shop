@@ -22,7 +22,6 @@ import { CommentListComponent } from './components/lot/comment-list/comment-list
 import { CommentModalComponent } from './components/lot/comment-modal/comment-modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +47,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     NgbModule,
     FormsModule,
     HttpClientModule,
-    NgbTooltipModule 
+    NgbTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
