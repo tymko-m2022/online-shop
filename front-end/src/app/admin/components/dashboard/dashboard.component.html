@@ -1,62 +1,63 @@
 <section class="layout">
-<div class="container">
-    <div class="row justify-content-center mb-3">
-        <div class="col-12 col-lg-10 col-xxl-8">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-6">
-                    <div class="form-floating">
-                        <input type="text" name="slug" [class.valid]="validSlug" [class.notValid]="!validWarnSlug" [(ngModel)]="product.slug" class="form-control" id="floatingInput" placeholder="Type yout slug" (input) = "changeField($event)">
-                        <label for="floatingInput">Slug</label>
-                        <span class="validDesc" [class.d-none]="validWarnSlug">Дане значення некоректне або вже міститься в базі даних</span>
+    <div class="container">
+        <div class="row justify-content-center mb-3">
+            <div class="col-12 col-lg-11 col-xxl-8">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating">
+                            <input type="text" name="slug" [class.valid]="validSlug" [class.notValid]="!validWarnSlug" [(ngModel)]="product.slug" class="form-control" id="floatingInput" placeholder="Type yout slug" (input) = "changeField($event)">
+                            <label for="floatingInput">Slug</label>
+                            <span class="validDesc" [class.d-none]="validWarnSlug">Дане значення повинно бути на латиниці або воно вже міститься в базі даних</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating">
+                            <input type="text" name="name" [class.valid]="validName" [class.notValid]="!validWarnName" [(ngModel)]="product.name" class="form-control" id="floatingInput" placeholder="Type your name" (input) = "changeField($event)">
+                            <label for="floatingInput">Назва товару</label>
+                            <span class="validDesc" [class.d-none]="validWarnName">Тут можна вводити тільки букви та пробіли</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating">
+                            <input type="number" [class.valid]="validPrice" [class.notValid]="!validWarnPrice" name="price" [(ngModel)]="product.price" class="form-control" id="floatingInput" placeholder="Type your price" min="1" (input) = "changeField($event)">
+                            <label for="floatingInput">Ціна товару</label>
+                            <span class="validDesc" [class.d-none]="validWarnPrice">Тут можна вводити тільки цифри більше нуля</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating">
+                            <input type="text" name="img" [class.valid]="validImg" [class.notValid]="!validWarnImg" [(ngModel)]="product.img" class="form-control" id="floatingInput" placeholder="Type your src" (input) = "changeField($event)">
+                            <label for="floatingInput">Зображення товару</label>
+                            <span class="validDesc" [class.d-none]="validWarnImg">Нажаль картинку не було завантажено, перегляньте чи все вірно і спробуйте ще раз</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" [class.valid]="validDesc" [class.notValid]="!validWarnDesc" name="desc" [(ngModel)]="product.desc" placeholder="Type your desc" id="floatingTextarea2" style="height: 100px" (input) = "changeField($event)"></textarea>
+                            <label for="floatingTextarea2">Опис товару</label>
+                            <span class="validDesc" [class.d-none]="validWarnDesc">Тут можна вводити тільки букви, цифри та пробіли</span>
+                        </div>
+                    </div> 
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <button class="btn btn-pinok w-100" [class.hide] = "!hideBtn" (click)="addLot()">Додати товар до каталогу</button>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <div class="form-floating">
-                        <input type="text" name="name" [class.valid]="validName" [class.notValid]="!validWarnName" [(ngModel)]="product.name" class="form-control" id="floatingInput" placeholder="Type your name" (input) = "changeField($event)">
-                        <label for="floatingInput">Назва товару</label>
-                        <span class="validDesc" [class.d-none]="validWarnName">Тут можна вводити тільки букви та пробіли</span>
+            </div>        
+        </div>
+        <hr>
+        <div class="row row-40 mb-5 justify-content-around mt-3">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products; let i = index" [routerLink] = "['/products', lot.slug]">
+                <div class="lotCard mx-auto">
+                    <div class="lotCard-img">
+                        <img [src]="lot.img" [alt]="lot.name" class="w-100">
                     </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div class="form-floating">
-                        <input type="number" [class.valid]="validPrice" [class.notValid]="!validWarnPrice" name="price" [(ngModel)]="product.price" class="form-control" id="floatingInput" placeholder="Type your price" min="0" (input) = "changeField($event)">
-                        <label for="floatingInput">Ціна товару</label>
-                        <span class="validDesc" [class.d-none]="validWarnPrice">Тут можна вводити тільки цифри більше нуля</span>
+                    <div class="lotCard-info d-flex flex-column align-items-center justify-content-center">
+                        <h3 class="lotCard-title">{{ lot.name }}</h3>
+                        <button class="lotCard-trash" (click) = 'removeLot(i)'><i class="bi bi-trash"></i></button>
                     </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div class="form-floating">
-                        <input type="text" name="img" [class.valid]="validImg" [class.notValid]="!validWarnImg" [(ngModel)]="product.img" class="form-control" id="floatingInput" placeholder="Type your src" (input) = "changeField($event)">
-                        <label for="floatingInput">Зображення товару</label>
-                        <span class="validDesc" [class.d-none]="validWarnImg">Нажаль картинку не було завантажено, перегляньте чи все вірно і спробуйте ще раз</span>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating">
-                        <textarea class="form-control" [class.valid]="validDesc" [class.notValid]="!validWarnDesc" name="desc" [(ngModel)]="product.desc" placeholder="Type your desc" id="floatingTextarea2" style="height: 100px" (input) = "changeField($event)"></textarea>
-                        <label for="floatingTextarea2">Опис товару</label>
-                        <span class="validDesc" [class.d-none]="validWarnDesc">Тут можна вводити тільки букви, цифри та пробіли</span>
-                    </div>
-                </div> 
-                <div class="col-12 col-md-10 col-lg-8">
-                    <button class="btn btn-pinok w-100" [class.hide] = "!hideBtn" (click)="addLot()">Додати товар до каталогу</button>
-                </div>
+                </div>            
             </div>
-        </div>        
-    </div>
-    <hr>
-    <div class="row row-40 mb-5 justify-content-around mt-3">
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products; let i = index" [routerLink] = "['/products', lot.slug]">
-            <div class="lotCard mx-auto">
-                <div class="lotCard-img">
-                    <img [src]="lot.img" [alt]="lot.name" class="w-100">
-                </div>
-                <div class="lotCard-info d-flex flex-column align-items-center justify-content-center">
-                    <h3 class="lotCard-title">{{ lot.name }}</h3>
-                    <button class="lotCard-trash" (click) = 'removeLot(i)'><i class="bi bi-trash"></i></button>
-                </div>
-            </div>            
         </div>
     </div>
-</div>
 </section>
+    

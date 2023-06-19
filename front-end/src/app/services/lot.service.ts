@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Lot } from '../models/lot.model';
+import { CartService } from './cart.service';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class LotService {
 
   comments$ = this.commentsSubject.asObservable();
 
-  constructor() { 
+  constructor(private cartService: CartService) { 
     this.products = this.dataLot;
     this.comments = this.dataComments;
   }
@@ -45,10 +46,17 @@ export class LotService {
     this.dataLot = this.products;
     this.dataComments = this.comments;
     this.commentsSubject.next(this.comments);
+    this.cartService.removeFromCart(removedProduct);
   }
 
   set dataComments(item: { [slug: string]: string[] }){
-    localStorage.setItem("comments", JSON.stringify(item)); 
+    const stringifiedItem = JSON.stringify(
+      Object.keys(item).reduce((acc, key) => {
+        acc[key.toString()] = item[key];
+        return acc;
+      }, {} as { [slug: string]: string[] })
+    );
+    localStorage.setItem("comments", stringifiedItem); 
   }
 
   get dataComments(): { [slug: string]: string[] } {

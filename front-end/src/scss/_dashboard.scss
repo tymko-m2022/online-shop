@@ -3,6 +3,12 @@
     position: relative;
     .form-control{
         box-shadow: 0px 0px 20px rgba($primaryColor, .15);
+        &.notValid{
+            border: 2px solid red;   
+        }
+        &.valid{
+            border: 2px solid green;   
+        }
     }
     .validDesc{
         font-size: 12px;
@@ -16,5 +22,6 @@
             font-size: 10px;
         }
     }
+    
 }
 

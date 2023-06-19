@@ -68,7 +68,7 @@ export class DashboardComponent {
   
     const existingProduct = this.products.find(product => product.slug === value);
     if (!existingProduct) {
-      const strRegExp: string = `[\\p{L}\\d\\-]{${value.length}}`;
+      const strRegExp: string = `[\\(a-zA-Z){L}\\d\\-]{${value.length}}`;
       const regexp = new RegExp(strRegExp, "u");
       if (regexp.test(value)) {
         return true;
@@ -96,7 +96,14 @@ export class DashboardComponent {
     if (!value || value < 0) {
       return false;
     }
-    return true;
+    const numRegExp: string = `[\\d]{${value.toString().length}}`;
+    const regexp = new RegExp(numRegExp,"u");
+    if (regexp.test(value.toString())) {
+      return true;
+    }
+    else {
+      return false;
+    };
   }
 
   checkDesc(value: string): boolean{
@@ -136,7 +143,6 @@ export class DashboardComponent {
   addLot(){
       this.lotService.addLots(this.product);
       this.product = new DEFAULT_LOT();
-      // shitty код треба придумати щось круче
       this.validSlug = false;
       this.validName = false;
       this.validPrice = false;

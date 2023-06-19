@@ -38,7 +38,7 @@ export class CartService {
     this.cartItemsUpdated.next();
   }
 
-  removeFromCart(item: CartItem) {
+  removeFromCart(item: any) {
     const existingItemIndex = this.cartItems.findIndex((cartItem) => cartItem.slug === item.slug);
     if (existingItemIndex !== -1) {
       this.cartItems.splice(existingItemIndex, 1);
