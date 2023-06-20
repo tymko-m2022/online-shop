@@ -34,12 +34,12 @@ export class DashboardComponent {
 
   async changeField(event: Event) {
     const target = event.target as HTMLInputElement;
-    let value = target.value;//
+    let value = target.value;
     const name = target.name;
-    if (name === "price" && value[0] === "0") {//
-       target.value = value.slice(1);//
-       value = target.value;//
-    }//
+    if (name === "price" && value[0] === "0") {
+       target.value = value.slice(1);
+       value = target.value;
+    }
     switch (name) {
       case "slug":
         this.validSlug = this.checkSlug(value);
