@@ -58,10 +58,13 @@ export class DashboardComponent {
         this.validWarnDesc = this.validDesc ? true : false;
       break;
       case "img":
-        this.validImg = await this.checkImg(value);
-        this.validWarnImg = this.validImg ? true : false;
-      break;
+          this.checkImg(value);
+          return
     }
+    this.hideButton();
+  }
+
+  hideButton () {
     this.hideBtn = this.validSlug && this.validName && this.validPrice && this.validDesc && this.validImg;
   }
 
@@ -122,27 +125,14 @@ export class DashboardComponent {
     else {
       return false;
     };
-  }
+  };
 
-  async checkImg(value: string): Promise<boolean> {
-    if (!value) {
-      return false;
-    }
-  
-    let isImageLoaded = false;
-
-    await this.http.get(value, { responseType: 'blob' }).toPromise().then(() => {
-      isImageLoaded = true;
-    }).catch(() => {
-      isImageLoaded = false;
-    });
-
-    if(isImageLoaded){
-      return true;
-    } else{
-      return false;
-    }
-  }
+  checkImg (value: string) {
+    const img = new Image();
+    img.src = `../assets/${value}`;
+    img.onload = () => {this.validImg = true; this.validWarnImg = true; this.hideButton()};
+    img.onerror = () => {this.validImg = false; this.validWarnImg = false; this.hideButton()};
+  };
 
   addLot(){
       this.lotService.addLots(this.product);
