@@ -129,7 +129,7 @@ export class DashboardComponent {
 
   checkImg (value: string) {
     const img = new Image();
-    img.src = `../assets/${value}`;
+    img.src = value;
     img.onload = () => {this.validImg = true; this.validWarnImg = true; this.hideButton()};
     img.onerror = () => {this.validImg = false; this.validWarnImg = false; this.hideButton()};
   };
