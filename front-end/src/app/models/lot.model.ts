@@ -4,6 +4,7 @@ export interface Lot {
     desc: string;
     price: number;
     img: string;
+    exchangePrice: number;
     [key: string]: any;
 }
 
@@ -13,13 +14,15 @@ export class DEFAULT_LOT {
     desc: string;
     price: number;
     img: string;
+    exchangePrice: number;
 
-    constructor(){
-        this.slug =  "";
+    constructor() {
+        this.slug = "";
         this.name = "";
         this.desc = "";
         this.price = 0;
         this.img = "";
+        this.exchangePrice = 0;
     }
-    
+
 };
