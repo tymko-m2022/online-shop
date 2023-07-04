@@ -28,12 +28,15 @@ export class ThemeService {
     return this.colorTheme
   }
 
-  updateTheme () {
+  changeAndUpdateTheme () {
+    this.colorTheme = !this.colorTheme;
     localStorage.removeItem('theme');
     const memoryObject = {
       color: this.returnTheme()
     };
     localStorage.setItem('theme', JSON.stringify(memoryObject));
   }
+
+  
 
 }
