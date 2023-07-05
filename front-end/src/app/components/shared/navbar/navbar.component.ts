@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
     if (this.counterThemeClicks === 10) {
       clearTimeout(this.resetCount);
       this.counterThemeClicks = 0;
+      this.robotService.verificationParameters();
       this.robotService.robotStateTrue();
     }
   }

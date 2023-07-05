@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class RobotService {
   private robotState: boolean;
+  private firstTerm: number = 1;
+  private secondTerm: number = 1;
+
 
   constructor() { 
     this.robotState = (() => {
@@ -43,6 +46,19 @@ export class RobotService {
   robotStateFalse () {
     this.robotState = false;
     this.updateLocalStorage();
+  }
+
+  verificationParameters () {
+    this.firstTerm= Math.floor(Math.random()*100+1);
+    this.secondTerm= Math.floor(Math.random()*100+1);
+  }
+
+  returnFirstTerm () {
+    return this.firstTerm
+  }
+
+  returnSecondTerm () {
+    return this.secondTerm
   }
 
 }

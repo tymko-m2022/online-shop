@@ -1,4 +1,9 @@
 <router-outlet></router-outlet>
 <section class="robot" [class.opacityRobot]="realRobotState()">
-
+    <div class="termVerification">{{returnTerm1()}}</div>
+    <div class="termVerification">+</div>
+    <div class="termVerification">{{returnTerm2()}}</div>
+    <input #answer type="text" class="answerVerification">
+    <br><br>
+    <button class="startVerification" (click)="verificationEnd(answer)">GO</button>
 </section>

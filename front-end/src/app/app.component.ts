@@ -15,4 +15,24 @@ export class AppComponent {
   realRobotState () {
     return this.robotService.returnRobotState();
   }
+
+  returnTerm1 () {
+    return this.robotService.returnFirstTerm();
+  }
+
+  returnTerm2 () {
+    return this.robotService.returnSecondTerm();
+  }
+
+  verificationEnd (inputElement: HTMLInputElement) {
+    const term1: number = this.robotService.returnFirstTerm();
+    const term2: number = this.robotService.returnSecondTerm();
+    const sum: number = term1 + term2;
+    const result: number = Number(inputElement.value);
+    if (sum === result) {
+      this.robotService.robotStateFalse();
+      inputElement.value='';
+    }
+  }
+
 }
