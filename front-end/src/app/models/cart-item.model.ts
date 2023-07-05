@@ -4,6 +4,7 @@ export interface CartItem {
     price: number;
     quantity: number;
     img: string;
+    exchangePrice: number;
 }
 
 export const DEFAULT_CART_ITEM: CartItem = {
@@ -11,5 +12,6 @@ export const DEFAULT_CART_ITEM: CartItem = {
     name: "",
     price: 0,
     quantity: 0,
-    img: ""
+    img: "",
+    exchangePrice: 0,
 };

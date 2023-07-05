@@ -24,13 +24,13 @@
                         <h2 class="cart-title text-center">Загалом</h2>
                     </div>
                     <div class="col-6 col-sm-12" *ngFor="let cartItem of cartItems">
-                        <app-cart-item [cartItem] = "cartItem" (updateCheck)="checkCartItems()"></app-cart-item>
+                        <app-cart-item [cartItem] = "cartItem" (updateCheck)="checkCartItems()" [currency] = "currency"></app-cart-item>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-5 col-lg-4 mt-4 mt-md-0">
                 <div class="cart-summary">
-                    <h4 class="d-flex justify-content-between cart-summary-price"><span class="me-2">Сума замовлення:</span><span class="cart-summary-price--price">{{totalPrice}}₴</span></h4>
+                    <h4 class="d-flex justify-content-between cart-summary-price"><span class="me-2">Сума замовлення:</span><span class="cart-summary-price--price">{{totalPrice}} {{currency}}</span></h4>
                     <button class="btn btn-pinok btn-pinok--green w-100" (click)="placeOrder()">Оформити замовлення</button>
                 </div>
             </div>

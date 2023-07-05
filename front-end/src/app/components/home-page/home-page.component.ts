@@ -11,6 +11,7 @@ import { ExchangeRateService } from 'src/app/services/currency.service';
 export class HomePageComponent implements OnInit {
   filterText: string = '';
   exchangeRate: number = 1;
+  currency = "₴";
 
   constructor(private lotService: LotService, private exchangeRateService: ExchangeRateService) { }
 
@@ -23,6 +24,17 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.exchangeRateService.exchangeRate$.subscribe((rate) => {
       this.exchangeRate = rate;
+      switch (this.exchangeRateService.currency) {
+        case ("UAH"):
+          this.currency = "₴";
+          break;
+        case ("USD"):
+          this.currency = "$";
+          break;
+        case ("EUR"):
+          this.currency = "€";
+          break;
+      }
       this.updatePrices();
     });
   }
@@ -30,7 +42,7 @@ export class HomePageComponent implements OnInit {
   updatePrices(): void {
     // Оновлення цін товарів
     this.products.forEach((product) => {
-      product.exchangePrice = this.updatePrice(product.price);
+      product.exchangePrice = Number(this.updatePrice(product.price).toFixed(2));
     });
   }
 }

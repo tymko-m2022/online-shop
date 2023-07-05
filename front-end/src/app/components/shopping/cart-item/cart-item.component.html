@@ -8,7 +8,7 @@
     </div>
     <div class="col-12 col-sm-7 col-lg-3 col-xl-3">
       <h3 class="cart-item-title text-center text-sm-start mt-3 mt-md-0">{{ cartItem.name }}</h3>
-      <div class="d-flex d-lg-none cart-item-price my-2 my-md-3 justify-content-center justify-content-sm-start">Ціна: {{cartItem.price}}₴</div>
+      <div class="d-flex d-lg-none cart-item-price my-2 my-md-3 justify-content-center justify-content-sm-start">Ціна: {{cartItem.exchangePrice}} {{currency}}</div>
       <div class="d-flex d-lg-none mb-2 mb-md-3 justify-content-center justify-content-sm-start">
         Кількість: 
         <div class="cart-item-count ms-2">
@@ -16,10 +16,10 @@
           {{ cartItem.quantity }} 
           <span class="cart-item-count-btn" (click)="plusQuantity()">+</span></div>
         </div>
-      <div class="d-flex d-lg-none cart-item-price cart-item-price--dark justify-content-center justify-content-sm-start">Загалом: {{price}}₴</div>
+      <div class="d-flex d-lg-none cart-item-price cart-item-price--dark justify-content-center justify-content-sm-start">Загалом: {{price}} {{currency}}</div>
     </div>
     <div class="col-lg-2 d-none d-lg-block">
-      <div class="d-flex justify-content-center cart-item-price">{{cartItem.price}}₴</div>
+      <div class="d-flex justify-content-center cart-item-price">{{cartItem.exchangePrice}}{{currency}}</div>
     </div>
     <div class="col-lg-2 col-xl-3 d-none d-lg-block">
       <div class="d-flex justify-content-center">
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="col-lg-2 d-none d-lg-block">
-      <div class="d-flex justify-content-center cart-item-price cart-item-price--dark">{{price}}₴</div>
+      <div class="d-flex justify-content-center cart-item-price cart-item-price--dark">{{price}} {{currency}}</div>
     </div>
   </div>
 </div>
