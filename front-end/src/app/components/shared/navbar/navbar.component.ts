@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ExchangeRateService } from 'src/app/services/currency.service';
+import { RobotService } from 'src/app/services/robot.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,9 +11,11 @@ import { ExchangeRateService } from 'src/app/services/currency.service';
 })
 export class NavbarComponent implements OnInit {
   cartCount: number = 0;
+  counterThemeClicks: number = 0;
+  resetCount: any;
   selectedCurrency: string = "";
 
-  constructor(private cartService: CartService, private themeService: ThemeService, private exchangeRateService: ExchangeRateService) { }
+  constructor(private robotService: RobotService, private cartService: CartService, private themeService: ThemeService, private exchangeRateService: ExchangeRateService) { }
 
   ngOnInit(): void {
     this.selectedCurrency = this.exchangeRateService.currency;
@@ -23,6 +26,15 @@ export class NavbarComponent implements OnInit {
 
   changeTheme() {
     this.themeService.changeAndUpdateTheme();
+    this.counterThemeClicks += 1;
+    if (this.counterThemeClicks === 1) {
+      this.resetCount = setTimeout(() => {this.counterThemeClicks = 0},10000)
+    };
+    if (this.counterThemeClicks === 10) {
+      clearTimeout(this.resetCount);
+      this.counterThemeClicks = 0;
+      this.robotService.robotStateTrue();
+    }
   }
 
   getTheme() {
