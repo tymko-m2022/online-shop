@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class RobotService {
   private robotState: boolean;
+  private blockingState: boolean;
   private firstTerm: number = 1;
   private secondTerm: number = 1;
 
@@ -24,16 +25,35 @@ export class RobotService {
   
       return false;
     })();
+    this.blockingState = (() => {
+      if (localStorage.getItem('robot')) {
+
+        const memoryObject: object = JSON.parse(localStorage.getItem('robot')!);
+        if ("dataBlock" in memoryObject && typeof memoryObject.dataBlock === "boolean") {
+  
+          return memoryObject.dataBlock;
+  
+        }
+  
+      };
+  
+      return false;
+    })();
   }
 
   returnRobotState () {
     return this.robotState
   }
 
+  returnBlockingState () {
+    return this.blockingState
+  }
+
   updateLocalStorage () {
     localStorage.removeItem('robot');
     const memoryObject = {
-      data: this.returnRobotState()
+      data: this.returnRobotState(),
+      dataBlock: this.returnBlockingState()
     };
     localStorage.setItem('robot', JSON.stringify(memoryObject));
   }
@@ -45,6 +65,16 @@ export class RobotService {
 
   robotStateFalse () {
     this.robotState = false;
+    this.updateLocalStorage();
+  }
+
+  blockingStateTrue () {
+    this.blockingState = true;
+    this.updateLocalStorage();
+  }
+
+  blockingStateFalse () {
+    this.blockingState = false;
     this.updateLocalStorage();
   }
 

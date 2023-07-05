@@ -16,6 +16,10 @@ export class AppComponent {
     return this.robotService.returnRobotState();
   }
 
+  realBlockingState () {
+    return this.robotService.returnBlockingState();
+  }
+
   returnTerm1 () {
     return this.robotService.returnFirstTerm();
   }
@@ -29,10 +33,10 @@ export class AppComponent {
     const term2: number = this.robotService.returnSecondTerm();
     const sum: number = term1 + term2;
     const result: number = Number(inputElement.value);
-    if (sum === result) {
-      this.robotService.robotStateFalse();
-      inputElement.value='';
-    }
+    if (sum !== result) {
+     // this.robotService.blockingStateTrue();
+    };
+    this.robotService.robotStateFalse();
+    inputElement.value='';
   }
-
 }
