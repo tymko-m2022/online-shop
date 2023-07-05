@@ -96,3 +96,18 @@
 .bi-cart:hover{
     color: $cartColor;
 }
+
+.robot {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 99;
+    width: 100vw;
+    height: 100vh;
+    background-color: blue;
+    display: none;
+}
+
+.opacityRobot {
+    display: block;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RobotService } from './services/robot.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'front-end';
+  constructor (private robotService: RobotService) {
+
+  }
+
+  realRobotState () {
+    return this.robotService.returnRobotState();
+  }
 }
