@@ -5,11 +5,11 @@
 
 .navbar{
     height: 80px;
-    background-color: white;
+    background-color: var(--bgSite);
     &-toggler{
         width: 38px;
         height: 38px;
-        background: $secondaryColor;
+        background: var(--secondaryColor);
         padding: 8px;
         border: none;
         display: flex;
@@ -23,7 +23,7 @@
         z-index: 201;
 
         &:active{
-            background: $cartColor;
+            background: var(--cartColor);
         }
 
         &:focus{
@@ -62,7 +62,7 @@
             left:0;
             right: 0;
             width: 100%;
-            background: $bgShadeLight;
+            background: var(--bgShadeLight);
             z-index: 200;
             text-align: right;
         }
@@ -79,22 +79,22 @@
 
 .nav{
     &-link{
-    color: $primaryColor;
+    color: var(--primaryColor);
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
 }
 &-link:hover{
-    color: $secondaryColor;
+    color: var(--secondaryColor);
 }
 }
 
 .bi-cart{
-    color: $secondaryColor;
+    color: var(--secondaryColor);
 }
 
 .bi-cart:hover{
-    color: $cartColor;
+    color: var(--cartColor);
 }
 
 .robot {

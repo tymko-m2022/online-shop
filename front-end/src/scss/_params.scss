@@ -2,17 +2,39 @@
 
 $font: 'Jost', sans-serif;
 
-$primaryColor: #0D0E43;
-$secondaryColor: #FB2E86;
-$primaryColorLight: #111C85;
-$textColor: #9295AA;
-$subTextColor: #8A8FB9;
-$cartColor: #9F63B5;
-$cardNameColor: #151875;
-$cardBg: #F6F7FB;
-$cardHover: #EBF4F3;
-$bgShade: #EEEFFB;
-$bgShadeDark: #E7E4F8;
-$bgShadeLight: #F9F8FE;
-$colorSuccess: #19D16F;
-$colorSuccessDark: #0c7c41;
+.whiteTheme{
+    --primaryColor: #0D0E43;
+    --secondaryColor: #FB2E86;
+    --primaryColorLight: #111C85;
+    --textColor: #9295AA;
+    --subTextColor: #8A8FB9;
+    --cartColor: #9F63B5;
+    --cardNameColor: #151875;
+    --cardBg: #F6F7FB;
+    --cardHover: #EBF4F3;
+    --bgShade: #EEEFFB;
+    --bgShadeDark: #E7E4F8;
+    --bgShadeLight: #F9F8FE;
+    --colorSuccess: #19D16F;
+    --colorSuccessDark: #0c7c41;
+    --bgSite: #fff;
+}
+
+.darkTheme{
+    --primaryColor: #8093f1;
+    --secondaryColor: #FB2E86;
+    --primaryColorLight: #111C85;
+    --textColor: #f8f9fa;
+    --subTextColor: #f5f3f4;
+    --cartColor: #9F63B5;
+    --cardNameColor: #FB2E86;
+    --cardBg: #495057;
+    --cardHover: #6c757d;
+    --bgShade: #788bff;
+    --bgShadeDark: #5465ff;
+    --bgShadeLight: #bfd7ff;
+    --colorSuccess: #19D16F;
+    --colorSuccessDark: #0c7c41;
+    --bgSite: #212529;
+}
+

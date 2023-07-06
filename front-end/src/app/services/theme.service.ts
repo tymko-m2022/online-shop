@@ -1,42 +1,36 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-
   private colorTheme: boolean;
+  private colorSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  colorTheme$ = this.colorSubject.asObservable();
 
-  constructor() { 
-    this.colorTheme = (() => {
-      if (localStorage.getItem('theme')) {
-
-        const memoryObject: object = JSON.parse(localStorage.getItem('theme')!);
-        if ("color" in memoryObject && typeof memoryObject.color === "boolean") {
-  
-          return memoryObject.color;
-  
-        }
-  
-      };
-  
-      return false;
-    })();
+  constructor() {
+    this.colorTheme = this.dataColor;
+    this.colorSubject.next(this.colorTheme);
   }
 
-  returnTheme () {
-    return this.colorTheme
+  set dataColor(item: boolean) {
+    localStorage.setItem("color", JSON.stringify(item));
+    this.colorSubject.next(item);
   }
 
-  changeAndUpdateTheme () {
+  get dataColor(): boolean {
+    const data = localStorage.getItem("color");
+    return data ? JSON.parse(data) : false;
+  }
+
+  returnTheme(): boolean {
+    return this.colorTheme;
+  }
+
+  changeAndUpdateTheme(): void {
     this.colorTheme = !this.colorTheme;
-    localStorage.removeItem('theme');
-    const memoryObject = {
-      color: this.returnTheme()
-    };
-    localStorage.setItem('theme', JSON.stringify(memoryObject));
+    this.dataColor = this.colorTheme;
+    this.colorSubject.next(this.dataColor);
   }
-
-  
-
 }

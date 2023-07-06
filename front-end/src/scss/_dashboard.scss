@@ -2,7 +2,8 @@
     margin-bottom: 30px;
     position: relative;
     .form-control{
-        box-shadow: 0px 0px 20px rgba($primaryColor, .15);
+        background-color: transparent;
+        box-shadow: 0px 0px 20px rgba(#0D0E43, .15);
         &.notValid{
             border: 2px solid red;   
         }
@@ -15,7 +16,7 @@
         position: absolute;
         display: block;
         text-align: center;
-        color: $secondaryColor;
+        color: var(--secondaryColor);
         left: 0;
 
         @media screen and (max-width: 768px){

@@ -1,5 +1,5 @@
 .footer{
-    background: $bgShade;
+    background: var(--bgShade);
     padding-top: 40px;
     padding-bottom: 40px;
 }
@@ -7,7 +7,7 @@
 .subfooter{
     padding-top: 17px;
     padding-bottom: 17px;
-    background: $bgShadeDark;
-    color: $textColor;
+    background: var(--bgShadeDark);
+    color: var(--textColor);
     font-weight: 600;
 }

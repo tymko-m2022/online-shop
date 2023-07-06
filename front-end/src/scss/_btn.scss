@@ -2,20 +2,20 @@
     &-pinok{
         padding: 11px 30px 9px;
         transition: all .5s ease-in-out;
-        background: $secondaryColor;
+        background: var(--secondaryColor);
         color: white;
         border-radius: 3px;
         font-size: 16px;
         &:hover{
-            background-color: $cartColor;
+            background-color: var(--cartColor);
             color: white;
         }
 
 
         &--green{
-            background: $colorSuccess; 
+            background: var(--colorSuccess); 
             &:hover{
-                background-color: $colorSuccessDark;
+                background-color: var(--colorSuccessDark);
                 color: white;
             }
         }
@@ -23,12 +23,12 @@
         &--outline{
             padding: 8px 30px 7px;
             background: transparent;
-            border: 1px solid $secondaryColor;
-            color: $secondaryColor;
+            border: 1px solid var(--secondaryColor);
+            color: var(--secondaryColor);
 
             &:hover{
                 color: #fff;
-                border: 1px solid $cartColor;
+                border: 1px solid var(--cartColor);
             }
         }
     }

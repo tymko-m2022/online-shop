@@ -3,14 +3,14 @@
         font-size: 20px;
         line-height: 23px;
         font-weight: 500;
-        color: $cardNameColor;
+        color: var(--cardNameColor);
         margin-bottom: 30px;
     }
 
     &-item{
         padding-top: 15px;
         padding-bottom: 15px;
-        border-bottom: 1px solid $bgShadeDark;
+        border-bottom: 1px solid var(--bgShadeDark);
 
         &-head{
             position: relative;
@@ -47,7 +47,7 @@
 
         &-title{
             font-size: 20px;
-            color: $cardNameColor;
+            color: var(--cardNameColor);
 
             @media screen and (min-width: 992px){
                 font-size: 18px;
@@ -57,15 +57,15 @@
         &-price{
             font-weight: 500;
             font-size: 16px;
-            color: $secondaryColor;
+            color: var(--secondaryColor);
             &--dark{
-                color: $cartColor;
+                color: var(--cartColor);
             }
         }
 
         &-count{
             user-select: none;
-            background: $bgShadeLight;
+            background: var(--bgShadeLight);
             width: 60px;
             height: 20px;
             display: flex;
@@ -81,8 +81,8 @@
                 width: 16px;
                 font-weight: 500;
                 height: 100%;
-                background-color: $bgShadeDark;
-                color: $subTextColor;
+                background-color: var(--bgShadeDark);
+                color: var(--subTextColor);
                 cursor: pointer;
                 transition: all .5s ease-in-out;
 
@@ -93,8 +93,8 @@
                 }
 
                 &:hover{
-                    background-color: $subTextColor;
-                    color: $bgShadeDark;
+                    background-color: var(--subTextColor);
+                    color: var(--bgShadeDark);
                 }
 
                 &[disabled]{
@@ -107,18 +107,18 @@
 
     &-summary{
         padding: 15px;
-        background-color: $bgShadeLight;
+        background-color: var(--bgShadeLight);
         @media screen and (min-width: 992px){
             padding: 30px;
         }
 
         &-price{
             font-size: 18px;
-            color: $cardNameColor;
+            color: var(--cardNameColor);
             font-weight: 400;
             margin-bottom: 20px;
             padding-bottom: 8px;
-            border-bottom: 2px solid $bgShadeDark;
+            border-bottom: 2px solid var(--bgShadeDark);
 
             @media screen and (min-width: 992px){
                 margin-bottom: 30px;
