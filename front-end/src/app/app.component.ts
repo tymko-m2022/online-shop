@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   body = document.querySelector("body");
   darkTheme: boolean = false;
   title = 'front-end';
+  stopIntervalCountdown: any;
   constructor(private robotService: RobotService, private themeService: ThemeService) {
 
   }
@@ -59,9 +60,25 @@ export class AppComponent implements OnInit {
     const sum: number = term1 + term2;
     const result: number = Number(inputElement.value);
     if (sum !== result) {
-      // this.robotService.blockingStateTrue();
+       this.robotService.blockingStateTrue();
+       this.countdown();
     };
     this.robotService.robotStateFalse();
     inputElement.value = '';
+  }
+
+  countdown () {
+    this.robotService.startCountdown();
+    this.stopIntervalCountdown = setInterval(() => {
+      this.robotService.countdownMinus();
+        if (this.robotService.returnStopBlocking() === 0) {
+        clearInterval(this.stopIntervalCountdown);
+        this.robotService.blockingStateFalse();
+      }
+    },1000)
+  }
+
+  returnCountdownState () {
+    return this.robotService.returnStopBlocking()
   }
 }

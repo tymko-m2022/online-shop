@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 export class RobotService {
   private robotState: boolean;
   private blockingState: boolean;
+  private stopBlocking: number;
   private firstTerm: number = 1;
   private secondTerm: number = 1;
-
 
   constructor() { 
     this.robotState = (() => {
@@ -39,6 +39,20 @@ export class RobotService {
   
       return false;
     })();
+    this.stopBlocking = (() => {
+      if (localStorage.getItem('robot')) {
+
+        const memoryObject: object = JSON.parse(localStorage.getItem('robot')!);
+        if ("countdown" in memoryObject && typeof memoryObject.countdown === "number") {
+  
+          return memoryObject.countdown;
+  
+        }
+  
+      };
+  
+      return 0;
+    })();
   }
 
   returnRobotState () {
@@ -49,11 +63,16 @@ export class RobotService {
     return this.blockingState
   }
 
+  returnStopBlocking () {
+    return this.stopBlocking
+  }
+
   updateLocalStorage () {
     localStorage.removeItem('robot');
     const memoryObject = {
       data: this.returnRobotState(),
-      dataBlock: this.returnBlockingState()
+      dataBlock: this.returnBlockingState(),
+      countdown: this.returnStopBlocking()
     };
     localStorage.setItem('robot', JSON.stringify(memoryObject));
   }
@@ -89,6 +108,14 @@ export class RobotService {
 
   returnSecondTerm () {
     return this.secondTerm
+  }
+
+  startCountdown () {
+    this.stopBlocking = 60
+  }
+
+  countdownMinus () {
+    this.stopBlocking -= 1
   }
 
 }

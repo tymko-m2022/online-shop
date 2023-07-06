@@ -10,5 +10,6 @@
     <button class="startVerification" (click)="verificationEnd(answer)">GO</button>
 </section>
 <section class="robot" [class.opacityRobot]="realBlockingState()">
-    
+    <div class="countdown">До розблокування сторінки залишилось:</div>
+    <div class="countdown">{{returnCountdownState()}} секунд</div>
 </section>
