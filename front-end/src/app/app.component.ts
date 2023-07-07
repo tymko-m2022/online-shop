@@ -74,7 +74,9 @@ export class AppComponent implements OnInit {
         if (this.robotService.returnStopBlocking() === 0) {
         clearInterval(this.stopIntervalCountdown);
         this.robotService.blockingStateFalse();
-      }
+      };
+      this.robotService.newStartNotch();
+      this.robotService.updateLocalStorage();
     },1000)
   }
 
