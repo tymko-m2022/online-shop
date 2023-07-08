@@ -69,6 +69,7 @@ export class ShoppingComponent implements OnDestroy {
   }
 
   placeOrder() {
+    this.sendingAnOrder(this.formingAnOrder());
     this.cartService.clearCart();
     this.cartItems = this.cartService.returnLot();
     this.calculateTotalPrice();
@@ -77,5 +78,25 @@ export class ShoppingComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.cartItemsSubscription.unsubscribe();
+  }
+
+  //Формування замовлення для телеграмм
+
+  formingAnOrder() {
+    const fullOrder: Array<object> = this.cartService.returnLot();
+    let sliceOrder: string = fullOrder.reduce((acc, element, index) => {
+      if (('name' in element) && ('quantity' in element) && ('exchangePrice' in element)) {
+          acc += `Лот № ${index+1}: ${element.name} у кількості ${element.quantity} од. із загальною вартістю ${Number(element.quantity)*Number(element.exchangePrice)} ${this.currency}\n`;
+      }
+      return acc
+    },'');
+    sliceOrder += `Загальна вартість замовлення: ${this.totalPrice} ${this.currency}`;
+    return sliceOrder
+  }
+
+  //Відправлення замовлення
+
+  sendingAnOrder(message: string) {
+    console.log(message);
   }
 }
