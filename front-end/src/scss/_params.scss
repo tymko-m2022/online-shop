@@ -4,6 +4,7 @@ $font: 'Jost', sans-serif;
 
 .whiteTheme{
     --primaryColor: #0D0E43;
+    --primaryColor50: #0D0E4388;
     --secondaryColor: #FB2E86;
     --primaryColorLight: #111C85;
     --textColor: #9295AA;
@@ -18,23 +19,30 @@ $font: 'Jost', sans-serif;
     --colorSuccess: #19D16F;
     --colorSuccessDark: #0c7c41;
     --bgSite: #fff;
+    --boxShadow: #0D0E4320;
 }
 
 .darkTheme{
     --primaryColor: #8093f1;
+    --primaryColor50: #8093f188;
     --secondaryColor: #FB2E86;
     --primaryColorLight: #111C85;
     --textColor: #f8f9fa;
     --subTextColor: #f5f3f4;
     --cartColor: #9F63B5;
-    --cardNameColor: #FB2E86;
+    --cardNameColor: #9f86c0;
     --cardBg: #495057;
     --cardHover: #6c757d;
     --bgShade: #788bff;
     --bgShadeDark: #5465ff;
-    --bgShadeLight: #bfd7ff;
+    --bgShadeLight: #231942;
     --colorSuccess: #19D16F;
     --colorSuccessDark: #0c7c41;
     --bgSite: #212529;
+    --boxShadow: #8093f120;
 }
 
+
+@function HexToRGB($hex) {
+    @return red($hex), green($hex), blue($hex);
+  }

@@ -21,15 +21,16 @@
           </li>
         </ul>
       </div>
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item me-3">
+          <div class="customCheckbox position-relative">
+            <input  type="checkbox" name="colorChange" id="theme" [checked]="getTheme()" (change)="changeTheme()">
+            <label for="theme"></label>
+          </div>
+        </li>
         <li class="nav-item position-relative">
           <a class="nav-link" routerLink="/cart"><i class="bi bi-cart"></i></a>
           <span class="cart-count position-absolute top-0 end-0 bg-danger text-white rounded-circle d-flex justify-content-center align-items-center fw-bold" style="width: 16px; height: 16px; font-size: 12px;">{{cartCount}}</span>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item position-relative">
-          <button (click)="changeTheme()">{{getTheme()}}</button>
         </li>
       </ul>
       <button class="navbar-toggler collapsed ms-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

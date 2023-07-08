@@ -2,7 +2,7 @@
     $c: &;
     width: 100%;
     max-width: 270px;
-    box-shadow: 0px 0px 100px rgba(#0D0E43, .15);
+    box-shadow: 0px 0px 100px var(--boxShadow);
     cursor: pointer;
     padding-bottom: 16px;
     position: relative;
@@ -84,7 +84,7 @@
     align-items: center;
     padding: 10px;
     background-color: var(--bgSite);
-    box-shadow: 0px 0px 100px rgba(#0D0E43, .15);
+    box-shadow: 0px 0px 25px 5px var(--cardHover);
 
     @media screen and (min-width: 768px){
         padding: 15px;

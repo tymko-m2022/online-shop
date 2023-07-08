@@ -1,7 +1,7 @@
 .lotDetail{
     padding: 10px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 25px 10px #F6F4FD;
+    background: var(--bgSite);
+    box-shadow: 0px 0px 25px 10px var(--cardHover);
     border-radius: 2px;
 
     &-title{

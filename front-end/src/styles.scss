@@ -16,6 +16,30 @@
     &::selection {
         background: rgba(#FB2E86, .35);
     }
+
+    
+/* Стилі для контейнера з прокруткою */
+&::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+      background-color: var(--bgSite);
+      border-radius: 999px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+      background: var(--primaryColor50); 
+      border-radius: 999px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--primaryColor); 
+  }
+
 }
 
 html{
