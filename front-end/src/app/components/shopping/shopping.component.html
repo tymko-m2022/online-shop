@@ -8,10 +8,10 @@
                 <a class="btn btn-pinok" routerLink="/">Повернутись до каталогу товарів</a>
             </div>
         </div>
-        <div *ngIf="hasItems" class="row justify-content-center w-100">
-            <input #nameCustomer type="text" class="form-control" placeholder="Вкажіть Ваше ім'я">
+        <div class="row justify-content-center w-100" [class.opacityInput]="!hasItems">
+            <input #userName type="text" class="form-control" placeholder="Вкажіть Ваше ім'я">
             <br><br>
-            <input #phoneCustomer type="text" class="form-control" placeholder="Вкажіть Ваш номер після +380...">
+            <input #userPhone type="text" class="form-control" placeholder="Вкажіть 9 цифр Вашого номеру після +380...">
             <br><br><br>
         </div>
         <div *ngIf="hasItems" class="row">
@@ -37,7 +37,7 @@
             <div class="col-12 col-md-5 col-lg-4 mt-4 mt-md-0">
                 <div class="cart-summary">
                     <h4 class="d-flex justify-content-between cart-summary-price"><span class="me-2">Сума замовлення:</span><span class="cart-summary-price--price">{{totalPrice}} {{currency}}</span></h4>
-                    <button class="btn btn-pinok btn-pinok--green w-100" (click)="placeOrder()">Оформити замовлення</button>
+                    <button class="btn btn-pinok btn-pinok--green w-100" (click)="placeOrder(userName,userPhone)">Оформити замовлення</button>
                 </div>
             </div>
         </div>

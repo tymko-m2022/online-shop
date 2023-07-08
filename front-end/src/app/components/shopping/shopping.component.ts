@@ -68,8 +68,19 @@ export class ShoppingComponent implements OnDestroy {
     }, 0);
   }
 
-  placeOrder() {
-    this.sendingAnOrder(this.formingAnOrder());
+  placeOrder(nameInput: HTMLInputElement,phoneInput: HTMLInputElement) {
+    const name: string = nameInput.value;
+    const phone: string = phoneInput.value;
+    if (!Number(phone) || phone.length !== 9) {
+      nameInput.value = '';
+      return
+    };
+    if (!name.length) {
+      return
+    };
+    this.sendingAnOrder(this.formingAnOrder(name,phone));
+    nameInput.value = '';
+    phoneInput.value = '';
     this.cartService.clearCart();
     this.cartItems = this.cartService.returnLot();
     this.calculateTotalPrice();
@@ -82,7 +93,7 @@ export class ShoppingComponent implements OnDestroy {
 
   //Формування замовлення для телеграмм
 
-  formingAnOrder() {
+  formingAnOrder(nameCustomer: string, phoneCustomer: string) {
     const fullOrder: Array<object> = this.cartService.returnLot();
     let sliceOrder: string = fullOrder.reduce((acc, element, index) => {
       if (('name' in element) && ('quantity' in element) && ('exchangePrice' in element)) {
@@ -90,7 +101,7 @@ export class ShoppingComponent implements OnDestroy {
       }
       return acc
     },'');
-    sliceOrder += `Загальна вартість замовлення: ${this.totalPrice} ${this.currency}`;
+    sliceOrder = `Ім'я замовника: ${nameCustomer}\nНомер телефону: +380${phoneCustomer}\n\n${sliceOrder}\nЗагальна вартість замовлення: ${this.totalPrice} ${this.currency}`;
     return sliceOrder
   }
 
