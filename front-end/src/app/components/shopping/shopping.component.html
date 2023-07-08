@@ -8,6 +8,12 @@
                 <a class="btn btn-pinok" routerLink="/">Повернутись до каталогу товарів</a>
             </div>
         </div>
+        <div *ngIf="hasItems" class="row justify-content-center w-100">
+            <input #nameCustomer type="text" class="form-control" placeholder="Вкажіть Ваше ім'я">
+            <br><br>
+            <input #phoneCustomer type="text" class="form-control" placeholder="Вкажіть Ваш номер після +380...">
+            <br><br><br>
+        </div>
         <div *ngIf="hasItems" class="row">
             <div class="col-12 col-md-7 col-lg-8">
                 <div class="row justify-content-center">
