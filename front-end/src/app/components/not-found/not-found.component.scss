@@ -1,6 +1,7 @@
 .not-found{
     min-height: 130px;
-    background: #F6F5FF;
+    background: var(--bgShadeLight);
+    // background: #F6F5FF;
 
     &-img{
         width: 100%;
