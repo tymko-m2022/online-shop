@@ -105,30 +105,61 @@
     left: 0px;
     top: 0px;
     z-index: 98;
-    width: 100vw;
+    width: calc(100vw - 10px);
     height: 100vh;
-    background-color: blue;
+    border: 5px solid #556B2F;
+    border-radius: 10px;
+    background-color: #556B2FDD;
     display: none;
-    .termVerification {
-        width: 200px;
-        height: 50px;
+    .adminMessage {
+        font-size: 24px;
+        color: cornsilk;
+        margin-top: 40px;
+        width: 100%;
         text-align: center;
-        background-color: aliceblue;
-        color: maroon;
-        font-size: 35px;
-        border: 2px solid black;
-        margin: 10px;
-    };
+    }
+    .mathBox {
+        display: flex;
+        width: 100%;
+        height: 60px;
+        justify-content: center;
+        margin-top: 40px;
+        .termVerification {
+            width: 20%;
+            height: 50px;
+            text-align: center;
+            color: navy;
+            font-size: 50px;
+            font-weight: bolder
+        };
+        .plus {
+            width: 5%;
+        } 
+    }
     .answerVerification {
-        margin-left: 10px;
+        margin-left: calc(50vw - 85px);
+        margin-top: 30px;
         text-align: center;
+        border-radius: 10px;
+        width: 150px;
+        height: 40px;
+        font-size: 26px;
     };
     .startVerification {
-        margin-left: 10px;
-        width: 60px;
+        margin-left: calc(50vw - 60px);
+        width: 100px;
         height: 40px;
         font-size: 24px;
+        border-radius: 20px;
+        border: 3px solid navy;
+        color: navy;
+        background-color: transparent;
+        opacity: 0.6;
+        margin-top: 20px;
     };
+    .startVerification:hover {
+        opacity: 1;
+    }
     .countdown {
         width: 100%;
         height: 80px;

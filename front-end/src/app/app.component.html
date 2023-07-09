@@ -2,14 +2,17 @@
     <router-outlet></router-outlet>
 </div>
 <section class="robot" [class.opacityRobot]="realRobotState()">
-    <div class="termVerification">{{returnTerm1()}}</div>
-    <div class="termVerification">+</div>
-    <div class="termVerification">{{returnTerm2()}}</div>
+    <div class="adminMessage"><i>Щось нам здається, що Ваші дії на сторінці<br>дуже схожі на поведінку РОБОТА!<br>А це неприпустимо на природному майданчику!<br>Докажіть, що ми не праві!<br>Дайте відповідь по-людські...</i></div>
+    <div class="mathBox">
+        <div class="termVerification">{{returnTerm1()}}</div>
+        <div class="termVerification plus">+</div>
+        <div class="termVerification">{{returnTerm2()}}</div>
+    </div>
     <input #answer type="text" class="answerVerification">
     <br><br>
-    <button class="startVerification" (click)="verificationEnd(answer)">GO</button>
+    <button class="startVerification" (click)="verificationEnd(answer)">ТИСНИ</button>
 </section>
 <section class="robot" [class.opacityRobot]="realBlockingState()">
-    <div class="countdown">До розблокування сторінки залишилось:</div>
-    <div class="countdown">{{returnCountdownState()}} секунд</div>
+    <br><div class="countdown">До розблокування сторінки<br>залишилось:</div><br>
+    <div class="countdown">{{returnCountdownState()}} секунд<br>😥</div>
 </section>
