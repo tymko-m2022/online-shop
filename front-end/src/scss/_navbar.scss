@@ -104,7 +104,7 @@
     position: fixed;
     left: 0px;
     top: 0px;
-    z-index: 98;
+    z-index: 201;
     width: calc(100vw - 10px);
     height: 100vh;
     border: 5px solid #556B2F;
@@ -129,11 +129,15 @@
             height: 50px;
             text-align: center;
             color: navy;
-            font-size: 50px;
-            font-weight: bolder
+            font-size: 64px;
+            font-weight: bolder;
         };
+        @media screen and (max-width: 767px){
+            font-size: 24px;
+        }
         .plus {
-            width: 5%;
+            width: 30px;
+            height: 30px;
         } 
     }
     .answerVerification {
@@ -175,4 +179,12 @@
 }
 .opacityInput {
     display: none;
+}
+
+.dropdown-menu{
+    background: var(--bgSite);
+}
+.dropdown-item{
+    cursor: pointer;
+    color: var(--textColor);
 }

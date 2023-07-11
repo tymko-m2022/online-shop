@@ -68,7 +68,7 @@ export class ShoppingComponent implements OnDestroy {
     }, 0);
   }
 
-  placeOrder(nameInput: HTMLInputElement,phoneInput: HTMLInputElement) {
+  placeOrder(nameInput: HTMLInputElement, phoneInput: HTMLInputElement) {
     const name: string = nameInput.value;
     const phone: string = phoneInput.value;
     if (!Number(phone) || phone.length !== 9) {
@@ -78,7 +78,7 @@ export class ShoppingComponent implements OnDestroy {
     if (!name.length) {
       return
     };
-    this.sendingAnOrder(this.formingAnOrder(name,phone));
+    this.sendingAnOrder(this.formingAnOrder(name, phone));
     nameInput.value = '';
     phoneInput.value = '';
     this.cartService.clearCart();
@@ -97,10 +97,10 @@ export class ShoppingComponent implements OnDestroy {
     const fullOrder: Array<object> = this.cartService.returnLot();
     let sliceOrder: string = fullOrder.reduce((acc, element, index) => {
       if (('name' in element) && ('quantity' in element) && ('exchangePrice' in element)) {
-          acc += `Лот № ${index+1}: ${element.name} у кількості ${element.quantity} од. із загальною вартістю ${Number(element.quantity)*Number(element.exchangePrice)} ${this.currency}; \n`;
+        acc += `Лот № ${index + 1}: ${element.name} у кількості ${element.quantity} од. із загальною вартістю ${Number(element.quantity) * Number(element.exchangePrice)} ${this.currency}; \n`;
       }
       return acc
-    },'');
+    }, '');
     sliceOrder = `Ім'я замовника: ${nameCustomer}; \nНомер телефону: +380${phoneCustomer}; \n\n${sliceOrder}; \nЗагальна вартість замовлення: ${this.totalPrice} ${this.currency}`;
     return sliceOrder
   }
@@ -111,19 +111,19 @@ export class ShoppingComponent implements OnDestroy {
     const url = `https://api.telegram.org/bot5874958410:AAEchca2hgD9tg63m-2o6J31HTz6Jkp03ok/sendMessage?chat_id=-1001920648745&parse_mode=html&text=${message}`;
     const data = { username: 'for Yurchik' };
     try {
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-        });
-        const json = await response.json();
-        console.log('Успех:', JSON.stringify(json));
-    } 
+      const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const json = await response.json();
+      console.log('Успех:', JSON.stringify(json));
+    }
     catch (error) {
-        console.error('Ошибка:', error);
-    } 
+      console.error('Ошибка:', error);
+    }
   }
 }
 
