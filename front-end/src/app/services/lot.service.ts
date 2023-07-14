@@ -1,82 +1,82 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Lot } from '../models/lot.model';
-import { CartService } from './cart.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class LotService {
+  private apiUrl = '/api/lots';
+  private lotsSubject: BehaviorSubject<Lot[]> = new BehaviorSubject<Lot[]>([]);
+  public lots$: Observable<Lot[]> = this.lotsSubject.asObservable();
 
-  products: Lot[];
+  constructor(private http: HttpClient) { }
 
-  private comments: { [slug: string]: string[] } = {};
-
-  private commentsSubject = new BehaviorSubject<{ [slug: string]: string[] }>({});
-
-  comments$ = this.commentsSubject.asObservable();
-
-  constructor(private cartService: CartService) { 
-    this.products = this.dataLot;
-    this.comments = this.dataComments;
+  fetchLots(): void {
+    this.http.get<Lot[]>(this.apiUrl).pipe(
+      catchError((error) => {
+        console.error('Помилка отримання лотів:', error);
+        return [];
+      })
+    ).subscribe((lots) => {
+      this.lotsSubject.next(lots);
+    });
   }
 
-  set dataLot(item: Lot[]){
-    localStorage.setItem("data", JSON.stringify(item)) 
+  addLot(lot: Lot): void {
+    this.http.post<Lot>(this.apiUrl, lot).pipe(
+      catchError((error) => {
+        console.error('Помилка додавання лота:', error);
+        return [];
+      })
+    ).subscribe((newLot) => {
+      const currentLots = this.lotsSubject.getValue();
+      this.lotsSubject.next([...currentLots, newLot]);
+    });
   }
 
-  get dataLot(): Lot[] {
-    const data = localStorage.getItem("data");
-    return data ? JSON.parse(data) : [];
+  deleteLot(slug: string): void {
+    this.http.delete(`${this.apiUrl}/${slug}`).pipe(
+      catchError((error) => {
+        console.error('Помилка видалення лота:', error);
+        return [];
+      })
+    ).subscribe(() => {
+      const currentLots = this.lotsSubject.getValue();
+      const updatedLots = currentLots.filter((lot) => lot.slug !== slug);
+      this.lotsSubject.next(updatedLots);
+    });
   }
 
-  returnLots(): Lot[]{
-    return this.products;
-  }
-
-  addLots(lot: Lot): void{
-    this.products.push(lot);
-    this.dataLot = this.products;
-  }
-
-  removeLot(index: number): void{
-    const removedProduct = this.products.splice(index, 1)[0];
-    delete this.comments[removedProduct.slug];
-    this.dataLot = this.products;
-    this.dataComments = this.comments;
-    this.commentsSubject.next(this.comments);
-    this.cartService.removeFromCart(removedProduct);
-  }
-
-  set dataComments(item: { [slug: string]: string[] }){
-    const stringifiedItem = JSON.stringify(
-      Object.keys(item).reduce((acc, key) => {
-        acc[key.toString()] = item[key];
-        return acc;
-      }, {} as { [slug: string]: string[] })
+  getCommentsBySlug(slug: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/${slug}/comments`).pipe(
+      catchError((error) => {
+        console.error('Помилка отримання коментарів за слагом:', error);
+        return [];
+      })
     );
-    localStorage.setItem("comments", stringifiedItem); 
   }
 
-  get dataComments(): { [slug: string]: string[] } {
-    const data = localStorage.getItem("comments");
-    return data ? JSON.parse(data) : [];
+  addComment(slug: string, comment: string): void {
+    this.http.post(`${this.apiUrl}/${slug}/comments`, { comment }).pipe(
+      catchError((error) => {
+        console.error('Помилка додавання коментаря до лота за слагом:', error);
+        return [];
+      })
+    ).subscribe(() => {
+      // Оновлення коментарів після додавання
+      this.getCommentsBySlug(slug).subscribe((comments) => {
+        const currentLots = this.lotsSubject.getValue();
+        const updatedLots = currentLots.map((lot) => {
+          if (lot.slug === slug) {
+            return { ...lot, comments };
+          }
+          return lot;
+        });
+        this.lotsSubject.next(updatedLots);
+      });
+    });
   }
-
-  getCommentsBySlug(slug: string): string[] {
-    return this.comments[slug] || [];
-  }
-
-  addComment(slug: string, comment: string): void{
-    if (this.comments[slug]) {
-      this.comments[slug].push(comment);
-    } else {
-      this.comments[slug] = [comment];
-    }
-    this.dataComments = this.comments;
-    this.commentsSubject.next(this.comments);
-  }
-
 }
-

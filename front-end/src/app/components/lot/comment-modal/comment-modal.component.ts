@@ -9,8 +9,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class CommentModalComponent {
   @Input() lotSlug: string = '';
   newComment: string = '';
+  // userName: string = '';
 
-  constructor(public activeModal: NgbActiveModal){}
+  constructor(public activeModal: NgbActiveModal) { }
 
   saveComment() {
     this.activeModal.close(this.newComment);

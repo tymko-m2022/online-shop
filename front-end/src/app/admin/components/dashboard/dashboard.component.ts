@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LotService } from 'src/app/services/lot.service';
 import { HttpClient } from '@angular/common/http';
 import { DEFAULT_LOT, Lot } from 'src/app/models/lot.model';
@@ -8,9 +8,8 @@ import { DEFAULT_LOT, Lot } from 'src/app/models/lot.model';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-
-export class DashboardComponent {
-  products: Lot[];
+export class DashboardComponent implements OnInit {
+  products: Lot[] = [];
 
   product: Lot;
 
@@ -29,7 +28,14 @@ export class DashboardComponent {
 
   constructor(private lotService: LotService, private http: HttpClient) {
     this.product = new DEFAULT_LOT();
-    this.products = this.lotService.products ? this.lotService.returnLots() : [];
+  }
+
+  ngOnInit(): void {
+    this.lotService.lots$.subscribe((lots) => {
+      this.products = lots;
+    });
+
+    this.lotService.fetchLots();
   }
 
   async changeField(event: Event) {
@@ -59,7 +65,7 @@ export class DashboardComponent {
         break;
       case "img":
         this.checkImg(value);
-        return
+        return;
     }
     this.hideButton();
   }
@@ -93,10 +99,9 @@ export class DashboardComponent {
     const regexp = new RegExp(strRegExp, "u");
     if (regexp.test(value)) {
       return true;
-    }
-    else {
+    } else {
       return false;
-    };
+    }
   }
 
   checkPrice(value: number): boolean {
@@ -107,10 +112,9 @@ export class DashboardComponent {
     const regexp = new RegExp(numRegExp, "u");
     if (regexp.test(value.toString())) {
       return true;
-    }
-    else {
+    } else {
       return false;
-    };
+    }
   }
 
   checkDesc(value: string): boolean {
@@ -121,21 +125,28 @@ export class DashboardComponent {
     const regexp = new RegExp(strRegExp, "u");
     if (regexp.test(value)) {
       return true;
-    }
-    else {
+    } else {
       return false;
-    };
-  };
+    }
+  }
 
   checkImg(value: string) {
     const img = new Image();
     img.src = value;
-    img.onload = () => { this.validImg = true; this.validWarnImg = true; this.hideButton() };
-    img.onerror = () => { this.validImg = false; this.validWarnImg = false; this.hideButton() };
-  };
+    img.onload = () => {
+      this.validImg = true;
+      this.validWarnImg = true;
+      this.hideButton();
+    };
+    img.onerror = () => {
+      this.validImg = false;
+      this.validWarnImg = false;
+      this.hideButton();
+    };
+  }
 
   addLot() {
-    this.lotService.addLots(this.product);
+    this.lotService.addLot(this.product);
     this.product = new DEFAULT_LOT();
     this.validSlug = false;
     this.validName = false;
@@ -151,9 +162,7 @@ export class DashboardComponent {
     this.validWarnImg = true;
   }
 
-  removeLot(index: number) {
-    this.lotService.removeLot(index)
+  removeLot(slug: string) {
+    this.lotService.deleteLot(slug);
   }
-
-
 }

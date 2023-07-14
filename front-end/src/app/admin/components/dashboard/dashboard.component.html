@@ -46,15 +46,18 @@
         </div>
         <hr>
         <div class="row row-40 mb-5 justify-content-around mt-3">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products; let i = index" [routerLink] = "['/products', lot.slug]">
-                <div class="lotCard mx-auto">
-                    <div class="lotCard-img">
-                        <img [src]="lot.img" [alt]="lot.name" class="w-100">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products; let i = index">
+                <div class="lotCard mx-auto position-relative">
+                    <div [routerLink] = "['/products', lot.slug]">
+                        <div class="lotCard-img">
+                            <img [src]="lot.img" [alt]="lot.name" class="w-100">
+                        </div>
+                        <div class="lotCard-info d-flex flex-column align-items-center justify-content-center">
+                            <h3 class="lotCard-title">{{ lot.name }}</h3>
+                            
+                        </div>
                     </div>
-                    <div class="lotCard-info d-flex flex-column align-items-center justify-content-center">
-                        <h3 class="lotCard-title">{{ lot.name }}</h3>
-                        <button class="lotCard-trash" (click) = 'removeLot(i)'><i class="bi bi-trash"></i></button>
-                    </div>
+                    <button class="lotCard-trash" (click) = 'removeLot(lot.slug)'><i class="bi bi-trash"></i></button>
                 </div>            
             </div>
         </div>

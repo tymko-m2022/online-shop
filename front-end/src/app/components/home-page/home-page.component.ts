@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LotService } from 'src/app/services/lot.service';
 import { FilterPipe } from './filter.pipe';
 import { ExchangeRateService } from 'src/app/services/currency.service';
+import { Lot } from 'src/app/models/lot.model';
 
 @Component({
   selector: 'app-home-page',
@@ -11,28 +12,34 @@ import { ExchangeRateService } from 'src/app/services/currency.service';
 export class HomePageComponent implements OnInit {
   filterText: string = '';
   exchangeRate: number = 1;
-  currency = "₴";
+  currency = '₴';
+  products: Lot[] = [];
 
   constructor(private lotService: LotService, private exchangeRateService: ExchangeRateService) { }
-
-  products = this.lotService.products ? this.lotService.products : [];
 
   updatePrice(price: number): number {
     return price * this.exchangeRate;
   }
 
   ngOnInit(): void {
+    this.lotService.lots$.subscribe((lots) => {
+      this.products = lots;
+      this.updatePrices();
+    });
+
+    this.lotService.fetchLots();
+
     this.exchangeRateService.exchangeRate$.subscribe((rate) => {
       this.exchangeRate = rate;
       switch (this.exchangeRateService.currency) {
-        case ("UAH"):
-          this.currency = "₴";
+        case 'UAH':
+          this.currency = '₴';
           break;
-        case ("USD"):
-          this.currency = "$";
+        case 'USD':
+          this.currency = '$';
           break;
-        case ("EUR"):
-          this.currency = "€";
+        case 'EUR':
+          this.currency = '€';
           break;
       }
       this.updatePrices();
@@ -41,8 +48,8 @@ export class HomePageComponent implements OnInit {
 
   updatePrices(): void {
     // Оновлення цін товарів
-    this.products.forEach((product) => {
-      product.exchangePrice = Number(this.updatePrice(product.price).toFixed(2));
+    this.products.forEach((lot) => {
+      lot.exchangePrice = Number(this.updatePrice(lot.price).toFixed(2));
     });
   }
 }
