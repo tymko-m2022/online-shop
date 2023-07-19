@@ -6,6 +6,7 @@ $font: 'Jost', sans-serif;
     --primaryColor: #0D0E43;
     --primaryColor50: #0D0E4388;
     --secondaryColor: #FB2E86;
+    --priceColor: #FB2E86;
     --primaryColorLight: #111C85;
     --textColor: #52577b;
     --subTextColor: #8A8FB9;
@@ -20,12 +21,16 @@ $font: 'Jost', sans-serif;
     --colorSuccessDark: #0c7c41;
     --bgSite: #fff;
     --boxShadow: #0D0E4320;
+    --bgModal: #ffffff45;
+    --modalText: #3F2E3E;
+    --modalSubText: #a792d0;
 }
 
 .darkTheme{
     --primaryColor: #8093f1;
     --primaryColor50: #8093f188;
     --secondaryColor: #FB2E86;
+    --priceColor: #D61355;
     --primaryColorLight: #111C85;
     --textColor: #f8f9fa;
     --subTextColor: #f5f3f4;
@@ -40,6 +45,8 @@ $font: 'Jost', sans-serif;
     --colorSuccessDark: #0c7c41;
     --bgSite: #212529;
     --boxShadow: #8093f120;
+    --bgModal: #00000040;
+    --modalText: #FFF4F4;
 }
 
 

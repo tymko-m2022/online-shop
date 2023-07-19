@@ -129,13 +129,20 @@ h1,h2,h3,h4,h5,h6,p,ul,ol{
         padding: 15px;
         border-radius: 0px;
         border: none;
-        background-color: rgba(#fff, .4);
+        background-color: var(--bgModal);
         backdrop-filter: blur(15px);
 
         .form-control{
             background-color: transparent;
             border: 1px solid var(--primaryColor);
+            &.modalField{
+                color: var(--modalText)!important;
+                &-::placeholder{
+                    color: var( --modalSubText)!important;
+                }
+            }
         }
+        
 
         .close{
             font-size: 32px;

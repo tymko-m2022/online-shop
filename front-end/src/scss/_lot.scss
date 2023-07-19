@@ -25,7 +25,7 @@
 
     &-price{
         font-size: 18px;
-        color: var(--secondaryColor);
+        color: var(--priceColor);
 
         @media screen and (min-height: 768px){
             font-size: 24px;

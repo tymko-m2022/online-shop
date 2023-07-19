@@ -94,6 +94,10 @@
 
 .bi-cart{
     color: var(--secondaryColor);
+    font-size: 24px;
+    @media screen and (max-width: 585px){
+        font-size: 18px;
+    }
 }
 
 .bi-cart:hover{

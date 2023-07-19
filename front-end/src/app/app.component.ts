@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RobotService } from './services/robot.service';
 import { ThemeService } from './services/theme.service';
+import { CartService } from './services/cart.service';
+
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,6 @@ export class AppComponent implements OnInit {
   title = 'front-end';
   stopIntervalCountdown: any;
   constructor(private robotService: RobotService, private themeService: ThemeService) {
-
   }
 
   ngOnInit(): void {
@@ -60,27 +61,27 @@ export class AppComponent implements OnInit {
     const sum: number = term1 + term2;
     const result: number = Number(inputElement.value);
     if (sum !== result) {
-       this.robotService.blockingStateTrue();
-       this.countdown();
+      this.robotService.blockingStateTrue();
+      this.countdown();
     };
     this.robotService.robotStateFalse();
     inputElement.value = '';
   }
 
-  countdown () {
+  countdown() {
     this.robotService.startCountdown();
     this.stopIntervalCountdown = setInterval(() => {
       this.robotService.countdownMinus();
-        if (this.robotService.returnStopBlocking() === 0) {
+      if (this.robotService.returnStopBlocking() === 0) {
         clearInterval(this.stopIntervalCountdown);
         this.robotService.blockingStateFalse();
       };
       this.robotService.newStartNotch();
       this.robotService.updateLocalStorage();
-    },1000)
+    }, 1000)
   }
 
-  returnCountdownState () {
+  returnCountdownState() {
     return this.robotService.returnStopBlocking()
   }
 }

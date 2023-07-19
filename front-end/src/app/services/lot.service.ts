@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Lot } from '../models/lot.model';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class LotService {
   private lotsSubject: BehaviorSubject<Lot[]> = new BehaviorSubject<Lot[]>([]);
   public lots$: Observable<Lot[]> = this.lotsSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cartService: CartService) {
+    this.fetchLots();
+  }
 
   fetchLots(): void {
     this.http.get<Lot[]>(this.apiUrl).pipe(
@@ -35,6 +38,12 @@ export class LotService {
       const currentLots = this.lotsSubject.getValue();
       this.lotsSubject.next([...currentLots, newLot]);
     });
+  }
+
+  returnLots(): Lot[] {
+    this.fetchLots();
+    console.log(this.lotsSubject.getValue());
+    return this.lotsSubject.getValue();
   }
 
   deleteLot(slug: string): void {
