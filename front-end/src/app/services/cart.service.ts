@@ -42,7 +42,6 @@ export class CartService {
       const updatedCartItems = this.cartItems.filter((cartItem) => {
         return lots.some((lot) => lot.slug === cartItem.slug);
       });
-
       this.cartItems = updatedCartItems;
       this.cartCountSubject.next(this.calculateTotalQuantity());
       this.dataCart = this.cartItems;

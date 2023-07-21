@@ -8,8 +8,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CommentModalComponent {
   @Input() lotSlug: string = '';
-  newComment: string = '';
-  // userName: string = '';
+  newComment: { name: string, text: string } = {
+    name: "",
+    text: "",
+  };
 
   constructor(public activeModal: NgbActiveModal) { }
 

@@ -14,10 +14,10 @@ import { Lot } from 'src/app/models/lot.model';
 })
 export class LotComponent implements OnInit {
   lot: any;
-  comments: string[] = [];
+  comments: { name: string, text: string }[] = [];
   exchangeRate: number = 1;
   currency = "₴";
-  newComment: string = "";
+  newComment: { name: string, text: string }[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -79,9 +79,9 @@ export class LotComponent implements OnInit {
     if (this.lot) {
       const myModal = this.modalService.open(CommentModalComponent, { centered: true, modalDialogClass: 'my-modal', backdropClass: 'light-pink-backdrop' });
       myModal.componentInstance.lotSlug = this.lot.slug;
-      myModal.result.then((newComment: string) => {
-        if (newComment.trim() !== '') {
-          let comment = newComment;
+      myModal.result.then((newComment: { name: string, text: string }) => {
+        if (newComment.text.trim() !== '') {
+          let comment = newComment.text;
           const warningWords = ['кокос', 'банан', 'плохой'];
           warningWords.forEach(word => {
             const regex = new RegExp(word, 'gi');
@@ -90,9 +90,10 @@ export class LotComponent implements OnInit {
 
           const regex = new RegExp(/@/gi);
           comment = comment.replace(regex, '*');
+          newComment.text = comment;
 
           if (this.lot) {
-            this.lotService.addComment(this.lot.slug, comment);
+            this.lotService.addComment(this.lot.slug, newComment);
             this.lotService.getCommentsBySlug(this.lot.slug).subscribe((comments) => {
               this.comments = comments;
             });

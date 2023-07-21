@@ -59,8 +59,8 @@ export class LotService {
     });
   }
 
-  getCommentsBySlug(slug: string): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/${slug}/comments`).pipe(
+  getCommentsBySlug(slug: string): Observable<{ name: string, text: string }[]> {
+    return this.http.get<{ name: string, text: string }[]>(`${this.apiUrl}/${slug}/comments`).pipe(
       catchError((error) => {
         console.error('Помилка отримання коментарів за слагом:', error);
         return [];
@@ -68,10 +68,10 @@ export class LotService {
     );
   }
 
-  addComment(slug: string, comment: string): void {
+  addComment(slug: string, comment: { name: string, text: string }): void {
     this.http.post(`${this.apiUrl}/${slug}/comments`, { comment }).pipe(
       catchError((error) => {
-        console.error('Помилка додавання коментаря до лота за слагом:', error);
+        console.error(`Помилка додавання коментаря до лота за слагом: ${slug}`, error);
         return [];
       })
     ).subscribe(() => {

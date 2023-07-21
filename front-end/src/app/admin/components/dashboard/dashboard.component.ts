@@ -31,11 +31,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.lotService.fetchLots();
     this.lotService.lots$.subscribe((lots) => {
       this.products = lots;
     });
-
-    this.lotService.fetchLots();
   }
 
   async changeField(event: Event) {

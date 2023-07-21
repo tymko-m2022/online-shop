@@ -13,22 +13,22 @@ export class RobotService {
   private secondTerm: number = 1;
   private countInterval: any;
 
-  constructor() { 
+  constructor() {
     this.notchSwitchingOn = (() => {
-        return Math.floor(Date.now() / 1000);
+      return Math.floor(Date.now() / 1000);
     })();
     this.notchShutdown = (() => {
       if (localStorage.getItem('robot')) {
 
         const memoryObject: object = JSON.parse(localStorage.getItem('robot')!);
         if ("notch" in memoryObject && typeof memoryObject.notch === "number") {
-  
+
           return memoryObject.notch;
-  
+
         }
-  
+
       };
-  
+
       return Math.floor(Date.now() / 1000);
     })();
     this.robotState = (() => {
@@ -36,13 +36,13 @@ export class RobotService {
 
         const memoryObject: object = JSON.parse(localStorage.getItem('robot')!);
         if ("data" in memoryObject && typeof memoryObject.data === "boolean") {
-  
+
           return memoryObject.data;
-  
+
         }
-  
+
       };
-  
+
       return false;
     })();
     this.blockingState = (() => {
@@ -50,13 +50,13 @@ export class RobotService {
 
         const memoryObject: object = JSON.parse(localStorage.getItem('robot')!);
         if ("dataBlock" in memoryObject && typeof memoryObject.dataBlock === "boolean") {
-  
+
           return memoryObject.dataBlock;
-  
+
         }
-  
+
       };
-  
+
       return false;
     })();
     this.stopBlocking = (() => {
@@ -64,13 +64,13 @@ export class RobotService {
 
         const memoryObject: object = JSON.parse(localStorage.getItem('robot')!);
         if ("countdown" in memoryObject && typeof memoryObject.countdown === "number") {
-  
+
           return memoryObject.countdown;
-  
+
         }
-  
+
       };
-  
+
       return 0;
     })();
     if (this.stopBlocking > 0) {
@@ -83,34 +83,34 @@ export class RobotService {
       else {
         this.countInterval = setInterval(() => {
           this.countdownMinus();
-            if (this.stopBlocking === 0) {
+          if (this.stopBlocking === 0) {
             clearInterval(this.countInterval);
             this.blockingStateFalse();
           };
           this.newStartNotch();
           this.updateLocalStorage();
-        },1000)
+        }, 1000)
       }
     }
   }
 
-  returnRobotState () {
+  returnRobotState() {
     return this.robotState
   }
 
-  returnBlockingState () {
+  returnBlockingState() {
     return this.blockingState
   }
 
-  returnStopBlocking () {
+  returnStopBlocking() {
     return this.stopBlocking
   }
 
-  returnNotchEnd () {
+  returnNotchEnd() {
     return this.notchSwitchingOn
   }
 
-  updateLocalStorage () {
+  updateLocalStorage() {
     localStorage.removeItem('robot');
     const memoryObject = {
       data: this.returnRobotState(),
@@ -121,48 +121,48 @@ export class RobotService {
     localStorage.setItem('robot', JSON.stringify(memoryObject));
   }
 
-  robotStateTrue () {
+  robotStateTrue() {
     this.robotState = true;
     this.updateLocalStorage();
   }
 
-  robotStateFalse () {
+  robotStateFalse() {
     this.robotState = false;
     this.updateLocalStorage();
   }
 
-  blockingStateTrue () {
+  blockingStateTrue() {
     this.blockingState = true;
     this.updateLocalStorage();
   }
 
-  blockingStateFalse () {
+  blockingStateFalse() {
     this.blockingState = false;
     this.updateLocalStorage();
   }
 
-  verificationParameters () {
-    this.firstTerm= Math.floor(Math.random()*100+1);
-    this.secondTerm= Math.floor(Math.random()*100+1);
+  verificationParameters() {
+    this.firstTerm = Math.floor(Math.random() * 100 + 1);
+    this.secondTerm = Math.floor(Math.random() * 100 + 1);
   }
 
-  returnFirstTerm () {
+  returnFirstTerm() {
     return this.firstTerm
   }
 
-  returnSecondTerm () {
+  returnSecondTerm() {
     return this.secondTerm
   }
 
-  startCountdown () {
+  startCountdown() {
     this.stopBlocking = 180
   }
 
-  countdownMinus () {
+  countdownMinus() {
     this.stopBlocking -= 1
   }
 
-  newStartNotch () {
+  newStartNotch() {
     this.notchShutdown = Math.floor(Date.now() / 1000);
   }
 

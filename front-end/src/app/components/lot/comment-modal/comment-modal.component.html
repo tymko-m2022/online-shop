@@ -5,11 +5,11 @@
     </button>
   </div>
   <div class="modal-body">
-    <!-- <div class="form-floating w-100">
-      <input id="userName" type="text" class="form-control" [(ngModel)]="userName" placeholder="Type your name">
+    <div class="form-floating w-100">
+      <input id="userName" type="text" class="form-control" [(ngModel)]="newComment.name" placeholder="Type your name">
       <label for="userName">Вкажіть Ваше ім'я</label>
-  </div> -->
-    <textarea class="form-control modalField" [(ngModel)]="newComment" style="min-height: 150px;" placeholder="Нам важливий Ваш відгук ^_^"></textarea>
+  </div>
+    <textarea class="form-control modalField" [(ngModel)]="newComment.text" style="min-height: 150px;" placeholder="Нам важливий Ваш відгук ^_^"></textarea>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-pinok w-100" (click)="saveComment()">Зберегти</button>

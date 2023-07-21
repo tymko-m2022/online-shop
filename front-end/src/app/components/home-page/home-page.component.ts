@@ -27,7 +27,7 @@ export class HomePageComponent implements OnInit {
       this.updatePrices();
     });
 
-    // this.lotService.fetchLots();
+    this.lotService.fetchLots();
 
     this.exchangeRateService.exchangeRate$.subscribe((rate) => {
       this.exchangeRate = rate;

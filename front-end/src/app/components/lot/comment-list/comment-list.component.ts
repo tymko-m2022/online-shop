@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./comment-list.component.scss']
 })
 export class CommentListComponent {
-  @Input() comments: string[] = [];
+  @Input() comments: { name: string, text: string }[] = [];
 }

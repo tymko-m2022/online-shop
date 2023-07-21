@@ -111,19 +111,20 @@ app.get('/api/lots/:slug/comments', (req, res) => {
 });
   
   // Додавання коментаря
-  app.post('/api/lots/:slug/comments', (req, res) => {
-    const slug = req.params.slug;
-    const commentText = req.body.comment;
+  
+app.post('/api/lots/:slug/comments', async (req, res) => {
+  const slug = req.params.slug;
+  const commentText = req.body.comment;
+  
+  try {
     const newComment = new CommentModel({ slug, text: commentText });
-    newComment.save()
-      .then(() => {
-        res.sendStatus(200);
-      })
-      .catch((error) => {
-        console.error('Помилка додавання коментаря до лота за слагом:', error);
-        res.status(500).json({ error: 'Помилка додавання коментаря до лота за слагом' });
-      });
-  });
+    await newComment.save();
+    res.status(200).json({log: "OK"});
+  } catch (error) {
+    console.error('Помилка додавання коментаря до лота за слагом:', error);
+    res.status(500).json({ error: 'Помилка додавання коментаря до лота за слагом' });
+  }
+});
 
 app.use((req, res) => {
     res.status(404).sendFile(path.join(frontEndPath, 'index.html'));

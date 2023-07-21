@@ -7,7 +7,7 @@ const lotSchema = new Schema({
   price: { type: Number, required: true },
   img: { type: String, required: true },
   exchangePrice: { type: Number, required: true },
-  comments: [{ type: String }],
+  comments: [{ type: { name: String, text: String } }],
 });
 
 const LotModel = model('Lot', lotSchema);
