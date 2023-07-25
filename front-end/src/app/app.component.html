@@ -1,4 +1,4 @@
-<div [class.overflowHidden]="realRobotState()">
+<div [class.overflowHidden]="realRobotState() || realBlockingState()">
     <router-outlet></router-outlet>
 </div>
 <section class="robot" [class.opacityRobot]="realRobotState()">
