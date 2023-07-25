@@ -10,8 +10,8 @@ import { CartService } from './cart.service';
 })
 export class LotService {
   private apiUrl = '/api/lots';
-  private lotsSubject: BehaviorSubject<Lot[]> = new BehaviorSubject<Lot[]>([]);
-  public lots$: Observable<Lot[]> = this.lotsSubject.asObservable();
+  private lotsSubject = new BehaviorSubject<Lot[]>([]);
+  lots$ = this.lotsSubject.asObservable();
 
   constructor(private http: HttpClient, private cartService: CartService) {
     this.fetchLots();
@@ -55,6 +55,15 @@ export class LotService {
     ).subscribe(() => {
       const currentLots = this.lotsSubject.getValue();
       const updatedLots = currentLots.filter((lot) => lot.slug !== slug);
+      this.lotsSubject.next(updatedLots);
+    });
+  }
+
+  updateLot(updatedLot: Lot): void {
+    this.http.put(`${this.apiUrl}/${updatedLot.slug}`, updatedLot).subscribe(() => {
+      const updatedLots = this.lotsSubject.getValue().map((lot) => {
+        return lot.slug === updatedLot.slug ? updatedLot : lot;
+      });
       this.lotsSubject.next(updatedLots);
     });
   }

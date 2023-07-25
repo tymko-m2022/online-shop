@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
 import { LotService } from './lot.service';
+import { ExchangeRateService } from 'src/app/services/currency.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,43 +13,79 @@ export class CartService {
   private cartCountSubject = new BehaviorSubject<number>(0);
   cartItemsUpdated: Subject<void> = new Subject<void>();
   cartCount$ = this.cartCountSubject.asObservable();
+  exchangeRate: number = 1;
+  currency = '₴';
 
-  constructor(private lotService: LotService) {
+  constructor(private lotService: LotService, private exchangeRateService: ExchangeRateService) {
     this.cartItems = this.dataCart;
     this.cartCountSubject.next(this.calculateTotalQuantity());
-    setTimeout(() => {
-      this.checkCartItemsAvailability();
-    }, 500)
+  }
+
+  updatePrices(): void {
+    // Оновлення цін товарів
+    this.cartItems.forEach((lot) => {
+      lot.exchangePrice = Number(this.updatePrice(lot.price).toFixed(2));
+    });
+  }
+
+  updatePrice(price: number): number {
+    return price * this.exchangeRate;
+  }
+
+  updateCartItemsWithLotsData(lots: any[]): void {
+    const updatedCartItems = this.cartItems.filter((cartItem) => {
+      return lots.some((lot) => lot.slug === cartItem.slug);
+    });
+    this.cartItems = updatedCartItems;
+    this.cartItems.forEach((item) => {
+      const correspondingLot = lots.find((lot) => lot.slug === item.slug);
+      if (correspondingLot) {
+        item.name = correspondingLot.name;
+        item.price = correspondingLot.price;
+        item.img = correspondingLot.img;
+        item.exchangePrice = correspondingLot.exchangePrice;
+      }
+    });
+    this.cartCountSubject.next(this.calculateTotalQuantity());
+    this.dataCart = this.cartItems;
+    this.cartItemsUpdated.next();
+    this.exchangeRateService.exchangeRate$.subscribe((rate) => {
+      this.exchangeRate = rate;
+      switch (this.exchangeRateService.currency) {
+        case 'UAH':
+          this.currency = '₴';
+          break;
+        case 'USD':
+          this.currency = '$';
+          break;
+        case 'EUR':
+          this.currency = '€';
+          break;
+      }
+      this.updatePrices();
+    });
   }
 
   // checkCartItemsAvailability(): void {
-  //   const updatedCartItems: CartItem[] = [];
-  //   const lots = this.lotService.returnLots();
-
-  //   this.cartItems.forEach((cartItem) => {
-  //     const existingLot = lots.find((lot) => lot.slug === cartItem.slug);
-  //     if (existingLot) {
-  //       updatedCartItems.push(cartItem);
-  //     }
+  //   this.lotService.lots$.subscribe((lots) => {
+  //     console.log(lots)
+  //     const updatedCartItems = this.cartItems.filter((cartItem) => {
+  //       return lots.some((lot) => lot.slug === cartItem.slug);
+  //     });
+  //     this.cartItems = updatedCartItems;
+  //     this.cartItems.forEach((item) => {
+  //       const correspondingLot = lots.find((lot) => lot.slug === item.slug);
+  //       if (correspondingLot) {
+  //         item.name = correspondingLot.name;
+  //         item.price = correspondingLot.price;
+  //         item.exchangePrice = correspondingLot.exchangePrice;
+  //       }
+  //     });
+  //     this.cartCountSubject.next(this.calculateTotalQuantity());
+  //     this.dataCart = this.cartItems;
+  //     this.cartItemsUpdated.next();
   //   });
-
-  //   this.cartItems = updatedCartItems;
-  //   this.cartCountSubject.next(this.calculateTotalQuantity());
-  //   this.dataCart = this.cartItems;
-  //   this.cartItemsUpdated.next();
   // }
-
-  checkCartItemsAvailability(): void {
-    this.lotService.lots$.subscribe((lots) => {
-      const updatedCartItems = this.cartItems.filter((cartItem) => {
-        return lots.some((lot) => lot.slug === cartItem.slug);
-      });
-      this.cartItems = updatedCartItems;
-      this.cartCountSubject.next(this.calculateTotalQuantity());
-      this.dataCart = this.cartItems;
-      this.cartItemsUpdated.next();
-    });
-  }
 
   set dataCart(item: CartItem[]) {
     localStorage.setItem("dataCart", JSON.stringify(item))

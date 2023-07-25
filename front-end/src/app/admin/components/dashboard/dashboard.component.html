@@ -39,7 +39,7 @@
                         </div>
                     </div> 
                     <div class="col-12 col-md-10 col-lg-8">
-                        <button class="btn btn-pinok w-100" [class.hide] = "!hideBtn" (click)="addLot()">Додати товар до каталогу</button>
+                        <div *ngIf="showEditForm; then ifBlock else elseBlock"></div>
                     </div>
                 </div>
             </div>        
@@ -54,13 +54,21 @@
                         </div>
                         <div class="lotCard-info d-flex flex-column align-items-center justify-content-center">
                             <h3 class="lotCard-title">{{ lot.name }}</h3>
-                            
                         </div>
                     </div>
+                    
                     <button class="lotCard-trash" (click) = 'removeLot(lot.slug)'><i class="bi bi-trash"></i></button>
-                </div>            
+                    <button class="btn btn-pinok btn-pinok--outline w-100 rounded-0" (click)="editLot(lot)">Редагувати</button>           
+                </div>
             </div>
         </div>
     </div>
 </section>
     
+<ng-template #ifBlock>
+    <div class="d-flex flex-column flex-md-row w-100 gap-3">
+        <button class="btn btn-pinok w-100 flex-grow-1" (click)="updateLot()">Зберегти зміни</button>
+        <button class="btn btn-pinok btn-pinok--outline w-100 flex-grow-1" (click)="cancelEdit()">Відмінити</button>
+    </div>
+</ng-template>
+<ng-template #elseBlock><button class="btn btn-pinok w-100" [class.hide] = "!hideBtn" (click)="addLot()">Додати товар до каталогу</button></ng-template>

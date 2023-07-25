@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LotService } from 'src/app/services/lot.service';
 import { HttpClient } from '@angular/common/http';
 import { DEFAULT_LOT, Lot } from 'src/app/models/lot.model';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,13 +21,15 @@ export class DashboardComponent implements OnInit {
   validImg: boolean = false;
   hideBtn: boolean = false;
 
+  showEditForm: boolean = false;
+
   validWarnSlug: boolean = true;
   validWarnName: boolean = true;
   validWarnPrice: boolean = true;
   validWarnDesc: boolean = true;
   validWarnImg: boolean = true;
 
-  constructor(private lotService: LotService, private http: HttpClient) {
+  constructor(private lotService: LotService, private http: HttpClient, private cartService: CartService) {
     this.product = new DEFAULT_LOT();
   }
 
@@ -35,6 +38,7 @@ export class DashboardComponent implements OnInit {
     this.lotService.lots$.subscribe((lots) => {
       this.products = lots;
     });
+    // setTimeout(() => { this.cartService.checkCartItemsAvailability() }, 1000)
   }
 
   async changeField(event: Event) {
@@ -164,4 +168,35 @@ export class DashboardComponent implements OnInit {
   removeLot(slug: string) {
     this.lotService.deleteLot(slug);
   }
+
+  editLot(lot: Lot): void {
+    this.product = lot; // Передаємо дані редагованого лоту до форми
+    this.showEditForm = true; // Показуємо форму редагування
+    window.scrollTo(0, 0);
+  }
+
+  updateLot(): void {
+    this.lotService.updateLot(this.product);
+    this.cancelEdit();
+  }
+
+  cancelEdit(): void {
+    // Очищення даних форми
+    this.product = new DEFAULT_LOT();
+    this.showEditForm = false;
+
+    // Скидання прапорців валідації полів
+    this.validSlug = false;
+    this.validName = false;
+    this.validPrice = false;
+    this.validDesc = false;
+    this.validImg = false;
+
+    this.validWarnSlug = true;
+    this.validWarnName = true;
+    this.validWarnPrice = true;
+    this.validWarnDesc = true;
+    this.validWarnImg = true;
+  }
+
 }

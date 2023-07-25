@@ -96,6 +96,24 @@ app.delete('/api/lots/:slug', (req, res) => {
     });
 });
 
+// Оновлення лоту
+app.put('/api/lots/:slug', async (req, res) => {
+  const slug = req.params.slug;
+  const updatedData = req.body;
+
+  try {
+    const updatedLot = await LotModel.findOneAndUpdate({ slug }, updatedData, { new: true });
+    if (!updatedLot) {
+      return res.status(404).json({ error: 'Лот не знайдено' });
+    }
+
+    res.status(200).json(updatedLot);
+  } catch (error) {
+    console.error('Помилка оновлення лота:', error);
+    res.status(500).json({ error: 'Помилка оновлення лота' });
+  }
+});
+
 // Отримання коментарів
 app.get('/api/lots/:slug/comments', (req, res) => {
   const slug = req.params.slug;
