@@ -25,6 +25,7 @@ export class HomePageComponent implements OnInit {
     this.lotService.lots$.subscribe((lots) => {
       this.products = lots;
       this.updatePrices();
+      this.scrollUp();
     });
 
     this.lotService.fetchLots();
@@ -46,6 +47,12 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  scrollUp(): void {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+  }
+
   updatePrices(): void {
     // Оновлення цін товарів
     this.products.forEach((lot) => {
@@ -53,3 +60,4 @@ export class HomePageComponent implements OnInit {
     });
   }
 }
+

@@ -6,11 +6,16 @@
   </div>
   <div class="modal-body">
     <div class="form-floating w-100">
-      <input id="userName" type="text" class="form-control modalField" [(ngModel)]="newComment.name" placeholder="Type your name">
+      <input id="userName" type="text" name="name" class="form-control modalField" [class.valid]="validName" [class.notValid]="!validWarnName" [(ngModel)]="newComment.name" placeholder="Type your name" (input) = "changeField($event)">
       <label for="userName" class="modalFill">Вкажіть Ваше ім'я</label>
-  </div>
-    <textarea class="form-control modalField" [(ngModel)]="newComment.text" style="min-height: 150px;" placeholder="Нам важливий Ваш відгук ^_^"></textarea>
+      <span class="validDesc" [class.d-none]="validWarnName">Тут можна вводити тільки букви</span>
+    </div>
+    <div class="form-floating">
+      <textarea id="floatingTextarea2" class="form-control modalField" [class.valid]="validText" [class.notValid]="!validWarnText" name="text" [(ngModel)]="newComment.text" style="min-height: 150px;" placeholder="Нам важливий Ваш відгук ^_^" (input) = "changeField($event)"></textarea>
+      <label for="floatingTextarea2" class="modalFill">Нам важливий Ваш відгук ^_^</label>
+      <span class="validDesc" [class.d-none]="validWarnText">Це поле не може бути пустим</span>
+    </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-pinok w-100" (click)="saveComment()">Зберегти</button>
+    <button type="button" class="btn btn-pinok w-100" [class.hide] = "!hideBtn" (click)="saveComment()">Зберегти</button>
 </div>

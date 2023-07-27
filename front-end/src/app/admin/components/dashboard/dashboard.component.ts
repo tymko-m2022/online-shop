@@ -173,6 +173,18 @@ export class DashboardComponent implements OnInit {
     this.product = lot; // Передаємо дані редагованого лоту до форми
     this.showEditForm = true; // Показуємо форму редагування
     window.scrollTo(0, 0);
+    this.validSlug = true;
+    this.validName = true;
+    this.validPrice = true;
+    this.validDesc = true;
+    this.validImg = true;
+    this.hideBtn = true;
+
+    this.validWarnSlug = true;
+    this.validWarnName = true;
+    this.validWarnPrice = true;
+    this.validWarnDesc = true;
+    this.validWarnImg = true;
   }
 
   updateLot(): void {

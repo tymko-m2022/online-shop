@@ -47,7 +47,7 @@
         <hr>
         <div class="row row-40 mb-5 justify-content-around mt-3">
             <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let lot of products; let i = index">
-                <div class="lotCard mx-auto position-relative">
+                <div class="lotCard lotCard--admin mx-auto position-relative">
                     <div [routerLink] = "['/products', lot.slug]">
                         <div class="lotCard-img">
                             <img [src]="lot.img" [alt]="lot.name" class="w-100">
@@ -67,7 +67,7 @@
     
 <ng-template #ifBlock>
     <div class="d-flex flex-column flex-md-row w-100 gap-3">
-        <button class="btn btn-pinok w-100 flex-grow-1" (click)="updateLot()">Зберегти зміни</button>
+        <button class="btn btn-pinok w-100 flex-grow-1" [class.hide] = "!hideBtn" (click)="updateLot()">Зберегти зміни</button>
         <button class="btn btn-pinok btn-pinok--outline w-100 flex-grow-1" (click)="cancelEdit()">Відмінити</button>
     </div>
 </ng-template>
